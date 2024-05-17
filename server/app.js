@@ -1,13 +1,23 @@
 const express = require('express')
-const api = require('./Routes/api')
+const api = require('./Routes/auth')
+const mongoose = require('mongoose')
 require('dotenv').config()
 
-
+const port = process.env.PORT || 5000
 const app = express()
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-const port = process.env.PORT || 5000
 app.use('/api', api)
+
+//connect to database
+const mongoURI = process.env.MongoURI
+mongoose.connect(mongoURI)
+.then(()=>{
+    console.log("Connected to database")
+})
+.catch(err =>{
+    console.log(`Error connecting to database ${err}`)
+})
 
 app.get('/', (req, res)=>{
     res.send('Hello World')
