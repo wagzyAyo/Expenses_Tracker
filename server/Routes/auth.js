@@ -10,12 +10,14 @@ router.get('/', (req, res)=>{
 
 
 //login route
-
+//prefix /api
 router.post('/login', async (req, res)=>{
     const { email, password} = req.body
-    const user = await userModel.findOne({email})
+
+    try{
+        const user = await userModel.findOne({email})
     if (!user){
-        res.status(401).json({message: "User not found"})
+        res.status(401).json({message: "No user found with the email"})
     } else{
         bcrypt.compare(password, user.password, (err, result)=>{
             if (err){
@@ -28,11 +30,16 @@ router.post('/login', async (req, res)=>{
                     lastName: user.lastName,
                     email: user.email,
                     Expenses: user.Expenses
-                }, process.env.SECRETE)
+                }, process.env.SECRETE, {expiresIn: "1h"})
                 res.json({status: "ok", user: token})
             }
         })
     }
+    } catch(err){
+        console.log(`Error during logging: ${err}`)
+        res.status(501).json({message: 'Internal server error'})
+    }
+    
 })
 
 
