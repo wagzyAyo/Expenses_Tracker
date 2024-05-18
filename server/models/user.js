@@ -17,7 +17,8 @@ const userSchema = mongoose.Schema({
     password: {
         required: true,
         type: String,
-    }
+    },
+    Expenses: []
 })
 
 const User = mongoose.model("users", userSchema)
