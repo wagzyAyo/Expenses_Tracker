@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-
+const userModel = require('../models/user')
 
 router.get('/', (req, res)=>{
     res.send({message: 'you hit the api route'}).json()
@@ -8,11 +8,7 @@ router.get('/', (req, res)=>{
 //Sign up route
 //prefix- /api
 router.post('/signup', (req, res)=>{
-    const firstName = req.body.firstName;
-    const lastName = req.body.lastName;
-    const email = req.body.email;
-    const password = req.body.signup
-
+    const {firstName, lastName, email, password}  = req.body;
     if (!firstName || !lastName || !email || !password){
         //res.send({message: "Include firstName, lastName, email & password in the body"})
         console.log('Signup route no params')
@@ -23,7 +19,14 @@ router.post('/signup', (req, res)=>{
             lastName,
             email,
             password
+        });
+        const newUser = new userModel({
+            firstName,
+            lastName,
+            email,
+            password
         })
+        newUser.save()
         res.sendStatus(200)
     }
     
