@@ -1,11 +1,35 @@
 const express = require('express');
 const userModel = require('../models/user')
-const { route } = require('./auth');
+const authenticateToken = require('../utils/authToken');
 
 
 
 const router = express.Router()
 
+//add expenses
+//prefix  /api/data
+router.post('/add', authenticateToken , async (req, res)=>{
+    const {category, amount, description, date} = req.body;
+    amount = parseInt(amount)
+
+    if(!category || !amount || !description || !date){
+        res.status(400).json({message: "please provide all required fields. category, amount, description, date"})
+    }
+    try{
+        const user = userModel.findOne({email: req.body.email});
+        if (!user){
+            res.status(401).json({message: "User not found"})
+        }
+        const newExpense = {category, amount, description, date}
+        user.Expenses.push(newExpense)
+        await user.save()
+        
+        res.status(201).json({message: "Expense added successfully"})
+    } catch(err){
+        console.log(`Error adding expense ${err}`)
+        res.status(500).json({message: 'internal server error'})
+    }
+})
 
 //delete expenses
 //prefix  /api/data
