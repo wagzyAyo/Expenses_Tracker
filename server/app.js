@@ -9,7 +9,7 @@ const app = express()
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use('/api', authRouter)
-app.use('api/data', dataRouter)
+app.use('/api/data', dataRouter)
 
 //connect to database
 const mongoURI = process.env.MongoURI

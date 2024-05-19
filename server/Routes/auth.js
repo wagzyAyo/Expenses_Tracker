@@ -29,7 +29,7 @@ router.post('/login', async (req, res)=>{
                 token(res, user._id)
                 res.json({status: "ok"})
             }else{
-                res.statusCode(401).json({message: "Invalid email or password"})
+                res.status(401).json({message: "Invalid email or password"})
             }
         })
     }

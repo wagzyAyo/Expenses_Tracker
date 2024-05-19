@@ -6,6 +6,10 @@ const authenticateToken = require('../utils/authToken');
 
 const router = express.Router()
 
+router.get('/', (req,res)=>{
+    res.status(200).json({mesage: "Here is your data"})
+})
+
 //add expenses
 //prefix  /api/data
 router.post('/add', authenticateToken , async (req, res)=>{
