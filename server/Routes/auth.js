@@ -3,6 +3,7 @@ const router = express.Router()
 const userModel = require('../models/user')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const token = require('../utils/genToken')
 
 router.get('/', (req, res)=>{
     res.send({message: 'you hit the api route'}).json()
@@ -25,13 +26,8 @@ router.post('/login', async (req, res)=>{
             }
 
             if(result){
-                const token = jwt.sign({
-                    firstName: user.firstName,
-                    lastName: user.lastName,
-                    email: user.email,
-                    Expenses: user.Expenses
-                }, process.env.SECRETE, {expiresIn: "1h"})
-                res.json({status: "ok", user: token})
+                
+                res.json({status: "ok", user: user.jwt})
             }
         })
     }
@@ -62,6 +58,7 @@ router.post('/signup',  (req, res)=>{
                     email,
                     password: newPassword,
                 })
+                token(res, newUser._id)
                 newUser.save()
                 res.status(200).json({message: "User created successfully"})
             } catch(err){
