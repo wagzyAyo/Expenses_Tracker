@@ -1,14 +1,15 @@
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const User = require('../models/user')
 
 const authenticateToken = async (req, res, next)=> {
-    const token = req.cookies.jwt || req.headers['authorization']
+    const token = req.cookies.jwt
 
     if (!token){
         res.status(401).json({message: "Access denied. You need authorization"})
     }
     try{
         const decoded = jwt.verify(token, process.env.SECRETE);
-        req.user = decoded;
+        req.user = await User.findById(decoded.userId).select('-password');
         next()
     } catch(err){
         res.status(400).json({message: "invalid token"})

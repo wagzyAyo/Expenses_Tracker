@@ -1,6 +1,7 @@
 const express = require('express')
 const authRouter = require('./Routes/auth')
 const mongoose = require('mongoose')
+const cookieParser = require('cookie-parser')
 require('dotenv').config()
 const dataRouter = require('./Routes/data')
 
@@ -8,6 +9,7 @@ const port = process.env.PORT || 5000
 const app = express()
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+app.use(cookieParser())
 app.use('/api', authRouter)
 app.use('/api/data', dataRouter)
 

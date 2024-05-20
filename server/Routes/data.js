@@ -1,26 +1,27 @@
 const express = require('express');
-const userModel = require('../models/user')
+const User = require('../models/user')
 const authenticateToken = require('../utils/authToken');
 
 
 
 const router = express.Router()
 
-router.get('/', (req,res)=>{
-    res.status(200).json({mesage: "Here is your data"})
+router.get('/', authenticateToken, (req,res)=>{
+    const user = req.user;
+    res.status(200).json({mesage: `Here is your data ${user}`})
 })
 
 //add expenses
 //prefix  /api/data
 router.post('/add', authenticateToken , async (req, res)=>{
-    const {category, amount, description, date} = req.body;
+    let {category, amount, description, date} = req.body;
     amount = parseInt(amount)
 
     if(!category || !amount || !description || !date){
         res.status(400).json({message: "please provide all required fields. category, amount, description, date"})
     }
     try{
-        const user = userModel.findOne({email: req.body.email});
+        const user = req.user
         if (!user){
             res.status(401).json({message: "User not found"})
         }
@@ -37,10 +38,19 @@ router.post('/add', authenticateToken , async (req, res)=>{
 
 //delete expenses
 //prefix  /api/data
-router.delete('/:id/delete', async (req, res)=>{
+router.delete('/:id/delete', authenticateToken,  async (req, res)=>{
+    const user = req.user
     const {id} = req.params;
     try {
-        const deleteExpenses = await userModel.findByIdAndDelete(id)
+        const expense = await user.Expenses.find((exp, index)=>{ 
+            if (exp._id === id){
+                user.Expenses.splice(index, 1)
+            }else {
+                res.status(400).json({message: "No expense found"})
+            }
+        } 
+        )
+        const deleteExpenses = console.log(expense)
         if (deleteExpenses){
             res.status(201).json({message: "Expense deleted successfully"})
         } else{
@@ -60,7 +70,7 @@ router.put('/:id/update', async (req, res)=>{
     const {id} = req.params
 
     try {
-        const updateExpense = await userModel.findByIdAndUpdate(id)
+        const updateExpense = await User.findByIdAndUpdate(id)
         if (updateExpense){
             res.status(201).json({message: "Expense updated successfully"})
         }else{
