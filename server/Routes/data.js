@@ -42,16 +42,16 @@ router.delete('/:id/delete', authenticateToken,  async (req, res)=>{
     const user = req.user
     const {id} = req.params;
     try {
-        const expense = await user.Expenses.find((exp, index)=>{ 
-            if (exp._id === id){
-                user.Expenses.splice(index, 1)
-            }else {
-                res.status(400).json({message: "No expense found"})
-            }
-        } 
-        )
-        const deleteExpenses = console.log(expense)
-        if (deleteExpenses){
+        const expenseIndex = user.Expenses.findIndex(exp => exp._id.toString() === id);
+        console.log(expenseIndex)
+
+        if (expenseIndex !== -1){
+            user.Expenses.slice(expenseIndex, 1);
+
+            console.log('updated expense', user.Expenses)
+            await user.save();
+
+            console.log('User after save', user)
             res.status(201).json({message: "Expense deleted successfully"})
         } else{
             res.status(404).json({message: "Expense not found"})

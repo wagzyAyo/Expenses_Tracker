@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const expenseSchema = require('./expense')
 
 const userSchema = mongoose.Schema({
     firstName: {
@@ -18,26 +19,7 @@ const userSchema = mongoose.Schema({
         required: true,
         type: String,
     },
-    Expenses: [
-        {
-            category: {
-                type: String,
-                required: true
-            },
-            description: {
-                type: String,
-                required: true
-            },
-            amount: {
-                type: Number,
-                required: true
-            },
-            date: {
-                type: String,
-                required: true
-            }
-        }
-    ]
+    Expenses: [expenseSchema]
 })
 
 const User = mongoose.model("users", userSchema)
