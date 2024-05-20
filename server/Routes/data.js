@@ -1,7 +1,7 @@
 const express = require('express');
 const User = require('../models/user')
 const authenticateToken = require('../utils/authToken');
-
+const mongoose = require('mongoose')
 
 
 const router = express.Router()
@@ -42,21 +42,36 @@ router.delete('/:id/delete', authenticateToken,  async (req, res)=>{
     const user = req.user
     const {id} = req.params;
     try {
-        const expenseIndex = user.Expenses.findIndex(exp => exp._id.toString() === id);
-        console.log(expenseIndex)
+        // Log the id from params for debugging
+        console.log('ID from params:', id);
 
-        if (expenseIndex !== -1){
-            user.Expenses.slice(expenseIndex, 1);
+        // Convert id to ObjectId if necessary
+        const expenseId = new mongoose.Types.ObjectId(id);
 
-            console.log('updated expense', user.Expenses)
+        // Log the converted ObjectId for debugging
+        console.log('Converted ObjectId:', expenseId);
+
+        // Find the index of the expense to delete
+        const expenseIndex = user.Expenses.findIndex(exp => exp._id.equals(expenseId));
+
+        // Log the index found
+        console.log('Expense Index:', expenseIndex);
+
+        if (expenseIndex !== -1) {
+            // Remove the expense from the array
+            user.Expenses.splice(expenseIndex, 1);
+
+            // Save the updated user document
             await user.save();
 
-            console.log('User after save', user)
-            res.status(201).json({message: "Expense deleted successfully"})
-        } else{
-            res.status(404).json({message: "Expense not found"})
+            // Log the user after save
+            console.log('User after save:', user);
+            
+            res.status(200).json({ message: "Expense deleted successfully" });
+        } else {
+            res.status(404).json({ message: "Expense not found" });
         }
-    } catch (err) {
+    }  catch (err) {
         console.log("Error deleting expense: "+ err)
         res.status(501).json({message: 'Internal server error'})
     }
