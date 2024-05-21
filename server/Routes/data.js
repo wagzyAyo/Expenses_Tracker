@@ -80,24 +80,28 @@ router.delete('/:id/delete', authenticateToken,  async (req, res)=>{
 
 //update expense
 //prefix api/data
-router.put('/:id/update', async (req, res)=>{
+router.put('/:id/update', authenticateToken, async (req, res)=>{
     const user = req.user
     const {id} = req.params
     const {category, amount, description, date} = req.body
 
-    if (!category || !amount || !description || !date){
-        res.status(400).json({message: "Add all required fields. category, amount , description, date"})
-    }
+    const expenseId = new mongoose.Types.ObjectId(id);
+
+    const expenseIndex = user.Expenses.findIndex(exp => exp._id.equals(expenseId))
+    const userExpenses = user.Expenses
+
+    
     try {
-        const updateExpense = user.findByIdAndUpdate(id, 
-            {category: category,
-             amount: amount,
-             description: description,
-             date: date
-            }
+        if (!category || !amount || !description || !date){
+            res.status(400).json({message: "Add all required fields. category, amount , description, date"})
+        }
         
-        )
-        if (updateExpense){
+        if (expenseIndex !== -1){
+            userExpenses[expenseIndex].category = category;
+            userExpenses[expenseIndex].amount = amount;
+            userExpenses[expenseIndex].description = description;
+            userExpenses[expenseIndex].date = date
+            
             await user.save()
             res.status(201).json({message: "Expense updated successfully"})
         }else{
