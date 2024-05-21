@@ -1,5 +1,4 @@
 const express = require('express');
-const User = require('../models/user')
 const authenticateToken = require('../utils/authToken');
 const mongoose = require('mongoose')
 
@@ -82,11 +81,24 @@ router.delete('/:id/delete', authenticateToken,  async (req, res)=>{
 //update expense
 //prefix api/data
 router.put('/:id/update', async (req, res)=>{
+    const user = req.user
     const {id} = req.params
+    const {category, amount, description, date} = req.body
 
+    if (!category || !amount || !description || !date){
+        res.status(400).json({message: "Add all required fields. category, amount , description, date"})
+    }
     try {
-        const updateExpense = await User.findByIdAndUpdate(id)
+        const updateExpense = user.findByIdAndUpdate(id, 
+            {category: category,
+             amount: amount,
+             description: description,
+             date: date
+            }
+        
+        )
         if (updateExpense){
+            await user.save()
             res.status(201).json({message: "Expense updated successfully"})
         }else{
             res.status(404).json({message: "Expense not found"})
