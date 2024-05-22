@@ -15,6 +15,8 @@ import {Link} from 'react-router-dom'
 
 const LonginScreen = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -22,43 +24,57 @@ const LonginScreen = () => {
     event.preventDefault();
   };
 
+  function handleSubmit(e){
+    e.preventDefault();
+    console.log('submit')
+  }
+
   return (
     <div className={css(styles.flexDisplay)}>
-        
-      <Box
-      component="form"
-      sx={{
-        '& > :not(style)': { m: 2, width: '350px', display: 'grid'},
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <img src={logo} alt={logo} className={css(styles.logo)}/>
+        <form action="" onSubmit={handleSubmit}>
+            <Box
+            component="div"
+            sx={{
+                '& > :not(style)': { m: 2, width: '350px', display: 'grid'},
+            }}
+            noValidate
+            autoComplete="off"
+            >
+            <img src={logo} alt={logo} className={css(styles.logo)}/>
 
-        <TextField id="outlined-basic" label="email" variant="outlined" name='email' />
-        <FormControl sx={{ m: 1 }} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-            <OutlinedInput
-                id="outlined-adornment-password"
-                type={showPassword ? 'text' : 'password'}
-                endAdornment={
-                <InputAdornment position="end">
-                    <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                    >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                </InputAdornment>
-                }
-                label="Password"
-            />
-            </FormControl>
-            <Button variant='contained'>Login</Button>
-             <Link to='/signup'>Dont have Account? Signup</Link>
-    </Box>
+                <TextField 
+                id="email" 
+                label="email" 
+                variant="outlined" 
+                name='email' 
+                value={email} 
+                onChange={e => setEmail(e.target.value)} 
+                autoComplete='email'
+                />
+                <FormControl sx={{ m: 1 }} variant="outlined">
+                    <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                    <OutlinedInput
+                        id="outlined-adornment-password"
+                        type={showPassword ? 'text' : 'password'}
+                        endAdornment={
+                        <InputAdornment position="end">
+                            <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                            edge="end"
+                            >
+                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                            </IconButton>
+                        </InputAdornment>
+                        }
+                        label="Password" name='password' value={password} onChange={e => setPassword(e.target.value)}
+                    />
+                    </FormControl>
+                    <Button variant='contained' type='submit'>Login</Button>
+                    <Link to='/signup' className='text-center text-blue-300'>Dont have Account? Signup</Link>
+            </Box>
+    </form>
     </div>
   )
 }
