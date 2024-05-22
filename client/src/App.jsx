@@ -1,10 +1,12 @@
-import { greeting } from "./utils.js/utilities"
+import { Outlet } from "react-router-dom"
+
+
 function App() {
 
 
   return (
     <div >
-      <h1 className="text-end">{greeting} John</h1>  
+      <Outlet /> 
     </div>
   )
 }
