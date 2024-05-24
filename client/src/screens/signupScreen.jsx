@@ -143,7 +143,7 @@ const styles = StyleSheet.create(
         display: 'grid',
         alignItems: 'center',
         justifyContent: "center",
-        margin: '20px auto'
+        margin: '10% auto'
     },
     logo: {
         width: '100px',
