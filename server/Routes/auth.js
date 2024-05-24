@@ -2,7 +2,6 @@ const express = require('express')
 const router = express.Router()
 const userModel = require('../models/user')
 const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
 const token = require('../utils/genToken')
 
 router.get('/', (req, res)=>{
@@ -24,10 +23,16 @@ router.post('/login', async (req, res)=>{
             if (err){
                 console.log(`Error matching password ${err}`)
             }
-
+           
             if(result){
                 token(res, user._id)
-                res.json({status: "ok"})
+                res.status(201).json({
+                    id: user._id,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    email: user.email,
+                    Expenses: user.Expenses
+                });
             }else{
                 res.status(401).json({message: "Invalid email or password"})
             }
