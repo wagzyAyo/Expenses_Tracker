@@ -29,7 +29,7 @@ const LoginScreen = () => {
     const { userInfo } = useSelector((state) => state.auth);
 
     useEffect(() => {
-        if (userInfo.firstName){
+        if (userInfo && userInfo.firstName){
             navigate('/home')
         }
     }, [navigate, userInfo]);
@@ -44,7 +44,7 @@ const LoginScreen = () => {
     e.preventDefault();
     try {
         const res = login({email, password}).unwrap()
-        dispatch(setCredentials({...res}))
+        dispatch(setCredentials(res))
         navigate('/home')
     } catch (err) {
         toast.error(err.data?.message || 'Incorrect email or password')
