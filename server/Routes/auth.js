@@ -48,36 +48,39 @@ router.post('/login', async (req, res)=>{
 
 //Sign up route
 //prefix- /api
-router.post('/signup',  (req, res)=>{
+router.post('/signup', async (req, res)=>{
     const {firstName, lastName, email, password}  = req.body;
     if (!firstName || !lastName || !email || !password){
         //res.send({message: "Include firstName, lastName, email & password in the body"})
         console.log('Signup route no params')
         res.status(401).json({message: "Cant Sign up user. Include firstName, lastName, email & password in the request body"})
     } else{
-      
-        const SALT = parseInt(process.env.SALT)
-        bcrypt.hash(password, SALT, (err, newPassword)=>{
             try{
+                const SALT = parseInt(process.env.SALT)
+                const newPassword = await bcrypt.hash(password, SALT)
                 const newUser = new userModel({
                     firstName,
                     lastName,
                     email,
                     password: newPassword,
                 })
+                await newUser.save()
                 token(res, newUser._id)
-                newUser.save()
-                res.status(200).json({message: "User created successfully"})
+                
+                const user =  await userModel.findOne({email})
+                res.status(200).json({ 
+                    id: user._id,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    email: user.email,
+                    Expenses: user.Expenses})
             } catch(err){
                 console.log(`Error creating user, duplicate email: ${err}`)
+                res.status(401).json({message: 'Error creating user, duplicate email'})
             }
-           
-        })
-
-        
-    }
+        }
     
-})
+});
 
 router.post('/logout', (req, res)=>{
     res.cookie('jwt', '', {
