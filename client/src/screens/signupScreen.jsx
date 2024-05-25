@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
@@ -8,10 +8,15 @@ import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import IconButton from '@mui/material/IconButton';
-import {StyleSheet, css} from 'aphrodite'
-import logo from '../assets/Logo.png'
+import {StyleSheet, css} from 'aphrodite';
+import logo from '../assets/Logo.png';
 import Button from '@mui/material/Button';
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCredentials } from '../slice/auth';
+import {toast} from 'react-toastify';
+import { useSignupMutation } from '../slice/userApiSlice';
+
 
 const SignupScreen = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -21,16 +26,38 @@ const SignupScreen = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("")
 
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const [signup, /*{isLoading}*/] = useSignupMutation();
+    const { userInfo } = useSelector((state) => state.auth);
+
+    useEffect(() => {
+        if (userInfo && userInfo.firstName){
+            navigate('/home')
+        }
+    }, [navigate, userInfo]);
+
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
 
-  function handleSubmit(e){
+  const handleSubmit = async(e) =>{
     e.preventDefault();
 
-    console.log('submit')
+    if (password !== confirmPassword){
+        toast.error('Password and confirm password do not match')
+    } else{
+        try {
+            const res = await signup({firstName, lastName,email, password}).unwrap()
+        dispatch(setCredentials(res))
+        navigate('/home')
+        } catch (err) {
+            console.log(err)
+        }
+    }
   }
 
   return (
