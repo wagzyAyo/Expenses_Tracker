@@ -43,7 +43,7 @@ const LoginScreen = () => {
   const handleSubmit = async (e)=>{
     e.preventDefault();
     try {
-        const res = login({email, password}).unwrap()
+        const res = await login({email, password}).unwrap()
         dispatch(setCredentials(res))
         navigate('/home')
     } catch (err) {
