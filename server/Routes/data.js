@@ -5,9 +5,11 @@ const mongoose = require('mongoose')
 
 const router = express.Router()
 
+//Get users data
+//prefix api/data
 router.get('/', authenticateToken, (req,res)=>{
     const user = req.user;
-    res.status(200).json({mesage: `Here is your data ${user}`})
+    res.status(200).json({user})
 })
 
 //add expenses
