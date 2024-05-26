@@ -1,4 +1,4 @@
-import { year } from "../utils.js/utilities"
+import { year } from "../utils/utils"
 
 
 const Footer = () => {

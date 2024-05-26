@@ -82,6 +82,8 @@ router.post('/signup', async (req, res)=>{
     
 });
 
+//Logout route
+//prefix- /api
 router.post('/logout', (req, res)=>{
     res.cookie('jwt', '', {
         httpOnly: true,

@@ -1,4 +1,4 @@
-import { greeting } from "../utils.js/utilities"
+import { greeting } from "../utils/utils"
 
 
 const Intro = () => {
