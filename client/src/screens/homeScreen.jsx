@@ -3,13 +3,17 @@ import Nav from "../components/nav";
 import Intro from "../components/intro";
 import Footer from "../components/footer";
 import { useUserDataMutation } from '../slice/userApiSlice';
-import Loader from '../components/loader'
+import Loader from '../components/loader';
+import { toTitleCase } from '../utils/utils';
+
+
 
 
 const HomeScreen = () => {
-  const [data, setData] = useState("")
-
+  const [data, setData] = useState("");
+ 
   const [userData, {isLoading}] = useUserDataMutation();
+
 
  useEffect(()=>{
   const fecthData = async ()=>{
@@ -31,12 +35,11 @@ const HomeScreen = () => {
         </>)
         :
         (<>
-        <Intro firstName={data?.firstName}/>
-        {console.log(data)}
+        <Intro firstName={toTitleCase(data?.firstName)} exp={data?.Expenses}/>
         </>)
-        
+       
       }
-        
+       
        </main>
        <Footer />
     </div>
@@ -44,4 +47,7 @@ const HomeScreen = () => {
 }
 
 
+
+
 export default HomeScreen
+
