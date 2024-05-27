@@ -15,11 +15,8 @@ if (time < 12) {
 }
 
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> 2707f3fadb8062f35a386415e9f0e137d4443cda
 export const toTitleCase = (str) => {
     if (!str) return '';
     return str.replace(/\w\S*/g, (txt) => {
@@ -27,7 +24,6 @@ export const toTitleCase = (str) => {
     });
   };
 
-<<<<<<< HEAD
 
   export const netSpend = (data) => {
     let total = 0;
@@ -55,6 +51,4 @@ export const toTitleCase = (str) => {
 
 
 export { greeting, year };
-=======
-export { greeting, year };
->>>>>>> 2707f3fadb8062f35a386415e9f0e137d4443cda
+
