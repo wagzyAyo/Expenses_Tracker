@@ -14,6 +14,53 @@ const Intro = (props) => {
     setActiveButton(ButtonName)
   }
 
+  const formatDate = (date) => {
+    const d = new Date(date);
+    const day = String(d.getDate()).padStart(2, '0');
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const year = d.getFullYear();
+    return `${day}-${month}-${year}`;
+  };
+
+  const filteredExpenses = () => {
+    const today = formatDate(new Date());
+
+    const current = new Date();
+    const weekStart = new Date(current.setDate(current.getDate() - current.getDay()));
+    const weekEnd = new Date(current.setDate(current.getDate() - current.getDay() + 6));
+
+    const monthStart = new Date();
+    monthStart.setDate(1);
+    const monthEnd = new Date(monthStart.getFullYear(), monthStart.getMonth() + 1, 0);
+
+  
+
+    if (props.exp) {
+      if (activeButton === 'today') {
+        return props.exp.filter(expense => expense.date === today);
+      } else if (activeButton === 'week') {
+        return props.exp.filter(expense => {
+          const [day, month, year] = expense.date.split('-');
+          const expenseDate = new Date(`${year}-${month}-${day}`);
+          return expenseDate >= weekStart && expenseDate <= weekEnd;
+        });
+      } else if (activeButton === 'month') {
+        return props.exp.filter(expense => {
+          const [day, month, year] = expense.date.split('-');
+          const expenseDate = new Date(`${year}-${month}-${day}`);
+          return expenseDate >= monthStart && expenseDate <= monthEnd;
+        });
+      }
+    }
+    return [];
+  };
+
+
+
+  const filteredExp = filteredExpenses()
+
+  
+
 
   const customButtonStyle = {
     contained: {
@@ -68,11 +115,11 @@ const Intro = (props) => {
         </div>
       </div>
       <div className="mt-10">
-        <b>NetSpend:</b> {toMoney(netSpend(props.exp))}
+        <b>NetSpend:</b> {toMoney(netSpend(filteredExp))}
       </div>
-      {props.exp && props.exp.length > 0 ?
+      {filteredExp && filteredExp.length > 0 ?
         (
-          props.exp.map((expense => {
+          filteredExp.map((expense => {
             return <Card  
             key={expense._id}
             id={expense._id}
@@ -96,12 +143,13 @@ const Intro = (props) => {
 
 Intro.propTypes = {
   firstName: PropType.string,
-  exp: PropType.array,
+  exp: PropType.arrayOf(PropType.shape({
+    _id: PropType.string.isRequired,
+    category: PropType.string.isRequired,
+    amount: PropType.number.isRequired,
+    date: PropType.string.isRequired,
+  })).isRequired,
 }
 
 
 export default Intro
-
-
-
-

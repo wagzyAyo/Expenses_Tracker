@@ -1,7 +1,8 @@
 import FoodIcon from '@mui/icons-material/Fastfood';
 import TravelIcon from '@mui/icons-material/AirplanemodeActive';
-import ShoppingIcon from '@mui/icons-material/ShoppingCart';
-import DefaultIcon from '@mui/icons-material/Category';
+import LocalMallIcon from '@mui/icons-material/LocalMall';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import DirectionsBusFilledTwoToneIcon from '@mui/icons-material/DirectionsBusFilledTwoTone';
 import PropTypes from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
 
@@ -14,20 +15,25 @@ const CategoryIcon = (props) => {
     return
   }
   switch (props.category.toLowerCase()) {
+    case 'transport':
+      IconComponent = DirectionsBusFilledTwoToneIcon;
+      iconClassName = styleSheet.transport
+      break;
     case 'food':
       IconComponent = FoodIcon;
       iconClassName = styleSheet.foodIcon;
       break;
-    case 'transportation':
+    case 'travel':
       IconComponent = TravelIcon;
       iconClassName = styleSheet.travelIcon
       break;
     case 'shopping':
-      IconComponent = ShoppingIcon;
+      IconComponent = LocalMallIcon;
       iconClassName = styleSheet.shoppingIcon;
       break;
     default:
-      IconComponent = DefaultIcon;
+      IconComponent = AttachMoneyIcon;
+      iconClassName = styleSheet.moneyIcon;
       break;
   }
 
@@ -57,6 +63,12 @@ const styleSheet = StyleSheet.create({
     },
     travelIcon: {
         color: '#2F9EDC'
+    },
+    moneyIcon: {
+      color: 'blue'
+    },
+    transport: {
+      color: 'brown'
     },
     '@global': {
         '.MuiSvgIcon-root': {

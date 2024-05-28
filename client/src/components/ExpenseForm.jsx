@@ -74,6 +74,12 @@ const ExpenseForm = (props) => {
           <MenuItem value="Food">Food</MenuItem>
           <MenuItem value="Cable bill">Cable bill</MenuItem>
           <MenuItem value="Electricity bill">Electricity bill</MenuItem>
+          <MenuItem value="Rent">Rent</MenuItem>
+          <MenuItem value="Shopping">Shopping</MenuItem>
+          <MenuItem value="Travel">Travel</MenuItem>
+          <MenuItem value="Gadget">Gadget</MenuItem>
+          <MenuItem value="Miscellaneous">Miscellaneous</MenuItem>
+          <MenuItem value="Others">Others</MenuItem>
           
         </Select>
       
