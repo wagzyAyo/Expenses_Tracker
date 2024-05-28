@@ -26,7 +26,13 @@ const ExpenseForm = (props) => {
 
       const handleSubmit = (e)=> {
         e.preventDefault();
-        props.onSubmit({category, amount, description, date})
+        const formData = {
+          category,
+          amount,
+          description,
+          date: date.format('DD-MM-YYYY')
+        }
+        props.onSubmit(formData)
       }
       
 
@@ -84,6 +90,7 @@ const ExpenseForm = (props) => {
                 value={date}
                 id='date'
                 onChange={(newValue) => setDate(newValue)}
+                format='DD-MM-YY'
               />
             </DemoContainer>
             </LocalizationProvider>

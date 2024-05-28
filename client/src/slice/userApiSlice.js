@@ -28,6 +28,13 @@ export const userApiSlice = apiSlice.injectEndpoints({
             query: ()=> ({
                 url: `${USER_URL}/data`,
             })
+        }),
+        addExpense: builder.mutation({
+            query: (data)=> ({
+                url: `${USER_URL}/data/add`,
+                method: 'POST',
+                body: data
+            })
         })
     }),
 });
@@ -36,5 +43,6 @@ export const {
     useLoginMutation, 
     useSignupMutation, 
     useLogoutMutation,
-    useUserDataMutation
+    useUserDataMutation,
+    useAddExpenseMutation
 } = userApiSlice
