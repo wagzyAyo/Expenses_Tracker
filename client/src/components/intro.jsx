@@ -1,4 +1,5 @@
 import { useState } from "react";
+import {Link} from "react-router-dom"
 import { greeting, netSpend, toMoney } from "../utils/utils";
 import PropType from 'prop-types';
 import Button from '@mui/material/Button';
@@ -56,7 +57,9 @@ const Intro = (props) => {
           onClick={()=> handleClick("month")}>This Month</Button>
         </div>
         <div>
-          <Button variant="contained">Add New</Button>
+          <Link to='/addnew'>
+            <Button variant="contained" >Add New</Button>
+          </Link>
         </div>
 
 
