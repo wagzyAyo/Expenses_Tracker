@@ -75,6 +75,7 @@ const Intro = (props) => {
           props.exp.map((expense => {
             return <Card  
             key={expense._id}
+            id={expense._id}
             category={expense.category}
             amount={toMoney(expense.amount)}
             date={expense.date}

@@ -17,6 +17,7 @@ import HomeScreen from './screens/homeScreen.jsx'
 import LoginScreen from './screens/loginScreen.jsx'
 import SignupScreen from './screens/signupScreen.jsx';
 import AddNewExpense from './screens/AddNewExpense.jsx';
+import UpdateExpense from './screens/UpdateExpense.jsx';
 
 
 const router = createBrowserRouter(
@@ -26,6 +27,7 @@ const router = createBrowserRouter(
       <Route path='/signup' element={<SignupScreen />}></Route>
       <Route path='/home' element={<HomeScreen />}></Route>
       <Route path='/addnew' element={<AddNewExpense />}></Route>
+      <Route path='/update' element={<UpdateExpense />}></Route>
     </Route>
   )
 )

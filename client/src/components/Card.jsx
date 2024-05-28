@@ -3,10 +3,29 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import PropType from 'prop-types';
+import { Link, useNavigate } from "react-router-dom";
 import CategoryIcon from "./CategoryIcon";
+import { useDeleteExpenseMutation } from "../slice/userApiSlice";
+import { toast } from "react-toastify";
 
 
 const Card = (props) => {
+    const [deleteExpense] = useDeleteExpenseMutation()
+
+    const navigate = useNavigate();
+
+    const handleDelete = async (id)=>{
+        
+        id = props.id
+        try {
+            await deleteExpense(id).unwrap();
+            toast.success('Expense deleted')
+            navigate('/')
+        } catch (err) {
+            toast.error(err?.message)
+        }
+    }
+
   return (
     <div className={css(styleSheet.card)}>
         <div >
@@ -17,10 +36,12 @@ const Card = (props) => {
         </div>
         <div>
             <div>
-                <IconButton aria-label="edit" size="small">
+                <Link to='/update'>
+                <IconButton aria-label="edit" size="small" >
                     <EditIcon fontSize="inherit" />
                 </IconButton>
-                <IconButton aria-label="delete" size="small">
+                </Link>
+                <IconButton aria-label="delete" size="small" onClick={handleDelete}>
                     <DeleteIcon fontSize="inherit" />
                 </IconButton>
             </div>
@@ -52,7 +73,8 @@ const styleSheet = StyleSheet.create({
 Card.propTypes = {
     category: PropType.string,
     date: PropType.string,
-    amount: PropType.string
+    amount: PropType.string,
+    id: PropType.string
 }
 
 
