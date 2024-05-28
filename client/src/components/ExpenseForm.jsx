@@ -93,12 +93,12 @@ const ExpenseForm = (props) => {
             />
              <label htmlFor="date" className='my-3'><b>Date</b></label>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DemoContainer components={['DatePicker']}>
+            <DemoContainer components={['DatePicker']} >
               <DatePicker
                 name='date'
                 value={date}
                 id='date'
-                onChange={(newValue) => setDate(newValue)}
+                onChange={(newValue) => setDate(dayjs(newValue))}
                 format='DD-MM-YY'
               />
             </DemoContainer>

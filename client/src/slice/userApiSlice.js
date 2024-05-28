@@ -43,7 +43,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
             })
         }),
         updateExpense: builder.mutation({
-            query: (params, data) => ({
+            query: ({params, data}) => ({
                 url: `${USER_URL}/data/${params}/update`,
                 method: 'PUT',
                 body: data

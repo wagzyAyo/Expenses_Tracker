@@ -43,7 +43,7 @@ export const toTitleCase = (str) => {
 
   export const toMoney = (amount) =>{
     if (isNaN(amount)){
-      console.log(`Amount is null`)
+      return '0.00'
     }
     const formattedAmount = amount.toFixed(0)
     return formattedAmount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");

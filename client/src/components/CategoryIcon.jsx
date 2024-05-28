@@ -10,7 +10,9 @@ const CategoryIcon = (props) => {
   let IconComponent;
   let iconClassName;
 
-
+  if (!props.category){
+    return
+  }
   switch (props.category.toLowerCase()) {
     case 'food':
       IconComponent = FoodIcon;
