@@ -27,7 +27,7 @@ const router = createBrowserRouter(
       <Route path='/signup' element={<SignupScreen />}></Route>
       <Route path='/home' element={<HomeScreen />}></Route>
       <Route path='/addnew' element={<AddNewExpense />}></Route>
-      <Route path='/update' element={<UpdateExpense />}></Route>
+      <Route path='/update/:id' element={<UpdateExpense />}></Route>
     </Route>
   )
 )

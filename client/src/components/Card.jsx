@@ -22,7 +22,7 @@ const Card = (props) => {
             toast.success('Expense deleted')
             navigate('/')
         } catch (err) {
-            toast.error(err?.message)
+            toast.error(err?.data?.message)
         }
     }
 
@@ -36,7 +36,7 @@ const Card = (props) => {
         </div>
         <div>
             <div>
-                <Link to='/update'>
+                <Link to={`/update/${props.id}`}>
                 <IconButton aria-label="edit" size="small" >
                     <EditIcon fontSize="inherit" />
                 </IconButton>

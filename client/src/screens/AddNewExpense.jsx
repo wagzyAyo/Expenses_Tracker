@@ -28,6 +28,7 @@ const AddNewExpense = () => {
             <ExpenseForm 
             heading={'Add New Expense'}
             subHeading={'Enter detail of your expenses.'}
+            btnText={'Add Expense'}
             onSubmit={handleAddNewExpense}
         />
         </main>

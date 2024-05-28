@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState ,useEffect } from 'react';
 import PropType from 'prop-types';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
@@ -18,10 +18,19 @@ import { StyleSheet, css } from 'aphrodite';
 
 
 const ExpenseForm = (props) => {
-    const [category, setCategory] = useState('');
-    const [description, setDescription] = useState("");
-    const [amount, setAmount] = useState("");
-    const [date, setDate] = useState(dayjs());
+    const [category, setCategory] = useState(props.initialValues?.category || '');
+    const [description, setDescription] = useState(props.initialValues?.description || '');
+    const [amount, setAmount] = useState(props.initialValues?.amount || '');
+    const [date, setDate] = useState(props.initialValues ? dayjs(props.initialValues.date) : dayjs());
+
+    useEffect(() => {
+      if (props.initialValues) {
+        setCategory(props.initialValues.category);
+        setDescription(props.initialValues.description);
+        setAmount(props.initialValues.amount);
+        setDate(dayjs(props.initialValues.date));
+      }
+    }, [props.initialValues]);
 
 
       const handleSubmit = (e)=> {
@@ -98,7 +107,7 @@ const ExpenseForm = (props) => {
     <Button 
     variant='contained'
     type='submit' className={css(styleSheet.btn)}>
-      Add Expense
+      {props.btnText}
     </Button>
 
     </FormControl>
@@ -122,7 +131,9 @@ const styleSheet = StyleSheet.create({
 ExpenseForm.propTypes = {
     heading: PropType.string,
     subHeading: PropType.string,
-    onSubmit: PropType.func
+    onSubmit: PropType.func,
+    btnText: PropType.string,
+    initialValues: PropType.object
 }
 
 export default ExpenseForm
