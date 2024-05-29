@@ -15,7 +15,7 @@ const AddNewExpense = () => {
     try {
          await addExpense(formData).unwrap()
          toast.success('New expense added')
-         navigate('/home')
+         navigate('/dashboard')
     } catch (err) {
       toast.error(err?.message)
     }
