@@ -18,6 +18,8 @@ import {toast} from 'react-toastify';
 import { useSignupMutation } from '../slice/userApiSlice';
 
 
+
+
 const SignupScreen = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [firstName, setFirstName] = useState("");
@@ -26,26 +28,33 @@ const SignupScreen = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("")
 
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
 
     const [signup, /*{isLoading}*/] = useSignupMutation();
     const { userInfo } = useSelector((state) => state.auth);
 
+
     useEffect(() => {
         if (userInfo && userInfo.firstName){
-            navigate('/home')
+            navigate('/dashboard')
         }
     }, [navigate, userInfo]);
 
+
   const handleClickShowPassword = () => setShowPassword((show) => !show);
+
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
 
+
   const handleSubmit = async(e) =>{
     e.preventDefault();
+
 
     if (password !== confirmPassword){
         toast.error('Password and confirm password do not match')
@@ -60,6 +69,7 @@ const SignupScreen = () => {
     }
   }
 
+
   return (
     <div className={css(styles.flexDisplay)}>
         <form action="" onSubmit={handleSubmit}>
@@ -72,42 +82,45 @@ const SignupScreen = () => {
             autoComplete="off"
             >
             <img src={logo} alt="logo" className={css(styles.logo)}/>
-                <TextField 
-                id="firstName" 
-                label="firstName" 
-                variant="outlined" 
-                name='firstName' 
+                <TextField
+                id="firstName"
+                label="firstName"
+                variant="outlined"
+                name='firstName'
                 value={firstName} onChange={e => setFirstName(e.target.value)}
                 autoComplete='given-name'
                 />
 
-                <TextField 
-                id="lastName" 
-                label="lastName" 
-                variant="outlined" 
-                name='lastName' 
-                value={lastName} 
-                onChange={e => setLastName(e.target.value)} 
+
+                <TextField
+                id="lastName"
+                label="lastName"
+                variant="outlined"
+                name='lastName'
+                value={lastName}
+                onChange={e => setLastName(e.target.value)}
                 autoComplete='family-name'
                 />
 
-                <TextField 
-                id="email" 
-                label="email" 
-                variant="outlined" 
-                name='email' 
-                value={email} 
+
+                <TextField
+                id="email"
+                label="email"
+                variant="outlined"
+                name='email'
+                value={email}
                 onChange={e => setEmail(e.target.value)}
                 autoComplete='email'
                 />
+
 
                 <FormControl sx={{ m: 1, width: '350px' }} variant="outlined">
                     <InputLabel htmlFor="password">Password</InputLabel>
                     <OutlinedInput
                         id="password"
                         type={showPassword ? 'text' : 'password'}
-                        name='password' 
-                        value={password} 
+                        name='password'
+                        value={password}
                         onChange={e => setPassword(e.target.value)}
                         endAdornment={
                         <InputAdornment position="end">
@@ -129,8 +142,8 @@ const SignupScreen = () => {
                     <OutlinedInput
                         id="confirmPassword"
                         type={showPassword ? 'text' : 'password'}
-                        name='confirmPassword' 
-                        value={confirmPassword} 
+                        name='confirmPassword'
+                        value={confirmPassword}
                         onChange={e => setConfirmPassword(e.target.value)}
                         endAdornment={
                         <InputAdornment position="end">
@@ -144,20 +157,21 @@ const SignupScreen = () => {
                             </IconButton>
                         </InputAdornment>
                         }
-                        label="confirmPassword" 
+                        label="confirmPassword"
                     />
                     </FormControl>
                     <Button variant='contained' type='submit'>Sign up</Button>
                     <div>
-                        <Link to='/' className='text-center text-blue-300'>Already have an account? Login
+                        <Link to='/login' className='text-center text-blue-300'>Already have an account? Login
                         </Link>
                     </div>
-                    
+                   
             </Box>
     </form>
     </div>
   )
 }
+
 
 const styles = StyleSheet.create(
     {
@@ -179,4 +193,8 @@ const styles = StyleSheet.create(
 }
 )
 
+
 export default SignupScreen
+
+
+
