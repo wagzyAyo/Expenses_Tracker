@@ -4,6 +4,10 @@ import { greeting, netSpend, toMoney } from "../utils/utils";
 import PropType from 'prop-types';
 import Button from '@mui/material/Button';
 import Card from './Card';
+import SummaryCard from "./SummaryCard";
+import { calculateSummary } from "../utils/componentUtils";
+
+
 
 
 const Intro = (props) => {
@@ -11,9 +15,12 @@ const Intro = (props) => {
   const [summary, setSummary] = useState(false)
 
 
+
+
   const handleClick = (ButtonName)=> {
     setActiveButton(ButtonName)
   }
+
 
   const formatDate = (date) => {
     const d = new Date(date);
@@ -23,18 +30,23 @@ const Intro = (props) => {
     return `${day}-${month}-${year}`;
   };
 
+
   const filteredExpenses = () => {
     const today = formatDate(new Date());
+
 
     const current = new Date();
     const weekStart = new Date(current.setDate(current.getDate() - current.getDay()));
     const weekEnd = new Date(current.setDate(current.getDate() - current.getDay() + 6));
 
+
     const monthStart = new Date();
     monthStart.setDate(1);
     const monthEnd = new Date(monthStart.getFullYear(), monthStart.getMonth() + 1, 0);
 
-  
+
+ 
+
 
     if (props.exp) {
       if (activeButton === 'today') {
@@ -56,14 +68,20 @@ const Intro = (props) => {
     return [];
   };
 
+
   const handleChangeSummary = () =>{
     setSummary(!summary)
     console.log(summary)
   }
 
 
-  const filteredExp = filteredExpenses()
-  
+
+
+  const filteredExp = filteredExpenses();
+  const summaryData = calculateSummary(filteredExp);
+ 
+
+
 
 
   const customButtonStyle = {
@@ -84,6 +102,8 @@ const Intro = (props) => {
     }
    
   };
+
+
 
 
   return (
@@ -114,6 +134,8 @@ const Intro = (props) => {
         </div>
 
 
+
+
         <div>
           <Button onClick={handleChangeSummary}>{summary ? "Hide Summary" : "Show Summary"}</Button>
         </div>
@@ -121,29 +143,37 @@ const Intro = (props) => {
       <div className="mt-10">
         <b>NetSpend:</b> {toMoney(netSpend(filteredExp))}
       </div>
-      
-      {filteredExp && filteredExp.length > 0 ?
-        (
-          filteredExp.map((expense => {
-            return <Card  
-            key={expense._id}
-            id={expense._id}
-            category={expense.category}
-            amount={toMoney(expense.amount)}
-            date={expense.date}
+      {summary ? (
+        filteredExp.length > 0 ? (
+          <div className="mt-5">
+            {Object.entries(summaryData).map(([category, total]) => (
+              <SummaryCard key={category} category={category} amount={toMoney(total)} />
+            ))}
+          </div>
+        ) : (
+          <p>No Expenses</p>
+        )
+      ) : (
+        filteredExp.length > 0 ? (
+          filteredExp.map(expense => (
+            <Card
+              key={expense._id}
+              id={expense._id}
+              category={expense.category}
+              amount={toMoney(expense.amount)}
+              date={expense.date}
             />
-          }))
+          ))
+        ) : (
+          <p>No Expenses</p>
         )
-        :
-        (
-          <>
-            <p>No Expenses </p>
-          </>
-        )
-      }
+      )}
+     
     </div>
   )
 }
+
+
 
 
 Intro.propTypes = {
@@ -155,6 +185,8 @@ Intro.propTypes = {
     date: PropType.string.isRequired,
   })),
 }
+
+
 
 
 export default Intro
