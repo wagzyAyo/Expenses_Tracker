@@ -5,7 +5,7 @@ import PropType from 'prop-types';
 import Button from '@mui/material/Button';
 import Card from './Card';
 import SummaryCard from "./SummaryCard";
-import { calculateSummary } from "../utils/componentUtils";
+import { calculateSummary } from "../utils/componentsUtils";
 
 
 
