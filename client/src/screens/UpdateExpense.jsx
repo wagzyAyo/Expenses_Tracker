@@ -19,7 +19,7 @@ const UpdateExpense = () => {
     try {
       await update({params:id, data:formData}).unwrap();
       toast.success('Expense updated');
-      navigate('/')
+      navigate('/dashboard')
     } catch (err) {
       toast.error(err?.data.message || err?.message)
     }

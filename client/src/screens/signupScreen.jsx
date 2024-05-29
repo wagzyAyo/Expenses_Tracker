@@ -53,7 +53,7 @@ const SignupScreen = () => {
         try {
             const res = await signup({firstName, lastName,email, password}).unwrap()
         dispatch(setCredentials(res))
-        navigate('/home')
+        navigate('/dashboard')
         } catch (err) {
             console.log(err)
         }

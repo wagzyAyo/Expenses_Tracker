@@ -7,7 +7,8 @@ import Card from './Card';
 
 
 const Intro = (props) => {
-  const [activeButton, setActiveButton] = useState("today")
+  const [activeButton, setActiveButton] = useState("today");
+  const [summary, setSummary] = useState(false)
 
 
   const handleClick = (ButtonName)=> {
@@ -55,10 +56,13 @@ const Intro = (props) => {
     return [];
   };
 
+  const handleChangeSummary = () =>{
+    setSummary(!summary)
+    console.log(summary)
+  }
 
 
   const filteredExp = filteredExpenses()
-
   
 
 
@@ -111,12 +115,13 @@ const Intro = (props) => {
 
 
         <div>
-          <Button >Show Summary</Button>
+          <Button onClick={handleChangeSummary}>{summary ? "Hide Summary" : "Show Summary"}</Button>
         </div>
       </div>
       <div className="mt-10">
         <b>NetSpend:</b> {toMoney(netSpend(filteredExp))}
       </div>
+      
       {filteredExp && filteredExp.length > 0 ?
         (
           filteredExp.map((expense => {
@@ -148,7 +153,7 @@ Intro.propTypes = {
     category: PropType.string.isRequired,
     amount: PropType.number.isRequired,
     date: PropType.string.isRequired,
-  })).isRequired,
+  })),
 }
 
 

@@ -13,7 +13,7 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import "./index.css"
-import HomeScreen from './screens/homeScreen.jsx'
+import UserDashboard from './screens/UserDashboard.jsx'
 import LoginScreen from './screens/loginScreen.jsx'
 import SignupScreen from './screens/signupScreen.jsx';
 import AddNewExpense from './screens/AddNewExpense.jsx';
@@ -25,7 +25,7 @@ const router = createBrowserRouter(
     <Route path='/' element={<App />}>
       <Route index={true} path='/' element={<LoginScreen />}></Route>
       <Route path='/signup' element={<SignupScreen />}></Route>
-      <Route path='/home' element={<HomeScreen />}></Route>
+      <Route path='/dashboard' element={<UserDashboard />}></Route>
       <Route path='/addnew' element={<AddNewExpense />}></Route>
       <Route path='/update/:id' element={<UpdateExpense />}></Route>
     </Route>

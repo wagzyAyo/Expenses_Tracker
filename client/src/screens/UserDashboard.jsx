@@ -9,7 +9,7 @@ import { toTitleCase } from '../utils/utils';
 
 
 
-const HomeScreen = () => {
+const UserDashboard = () => {
   const [data, setData] = useState("");
  
   const [userData, {isLoading}] = useUserDataMutation();
@@ -49,6 +49,6 @@ const HomeScreen = () => {
 
 
 
-export default HomeScreen
+export default UserDashboard
 
 
