@@ -8,48 +8,45 @@ export const calculateSummary = (expenses) => {
     }, {});
   };
 
-export  const formatDate = (date) => {
-  const d = new Date(date);
-  const day = String(d.getDate()).padStart(2, '0');
-  const month = String(d.getMonth() + 1).padStart(2, '0');
-  const year = d.getFullYear();
-  return `${day}-${month}-${year}`;
+  const formatDate = (date) => {
+    // Helper function to format date in DD-MM-YYYY format
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based in JS Date
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
+  };
+
+  
+const normalizeDate = (date) => {
+  // Helper function to normalize date to the start of the day
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate());
 };
 
-
+// Main function to filter expenses based on the active button
 export const filteredExpenses = (exp, activeButton) => {
+  if (!exp) return [];
+
   const today = formatDate(new Date());
 
-
-  const current = new Date();
-  const weekStart = new Date(current.setDate(current.getDate() - current.getDay()));
-  const weekEnd = new Date(current.setDate(current.getDate() - current.getDay() + 6));
-
-
-  const monthStart = new Date();
-  monthStart.setDate(1);
-  const monthEnd = new Date(monthStart.getFullYear(), monthStart.getMonth() + 1, 0);
-
-
-
-
-
-  if (exp) {
-    if (activeButton === 'today') {
-      return exp.filter(expense => expense.date === today);
-    } else if (activeButton === 'week') {
-      return exp.filter(expense => {
-        const [day, month, year] = expense.date.split('-');
-        const expenseDate = new Date(`${year}-${month}-${day}`);
-        return expenseDate >= weekStart && expenseDate <= weekEnd;
-      });
-    } else if (activeButton === 'month') {
-      return exp.filter(expense => {
-        const [day, month, year] = expense.date.split('-');
-        const expenseDate = new Date(`${year}-${month}-${day}`);
-        return expenseDate >= monthStart && expenseDate <= monthEnd;
-      });
-    }
+  if (activeButton === 'today') {
+    return exp.filter(expense => expense.date === today);
+  } else if (activeButton === 'week') {
+    const current = new Date();
+    const weekStart = normalizeDate(new Date(current.setDate(current.getDate() - current.getDay())));
+    const weekEnd = normalizeDate(new Date(weekStart));
+    weekEnd.setDate(weekStart.getDate() + 6);
+    return exp.filter(expense => {
+      const expenseDate = normalizeDate(new Date(expense.date.split('-').reverse().join('-')));
+      return expenseDate >= weekStart && expenseDate <= weekEnd;
+    });
+  } else if (activeButton === 'month') {
+    const current = new Date();
+    const monthStart = normalizeDate(new Date(current.getFullYear(), current.getMonth(), 1));
+    const monthEnd = normalizeDate(new Date(current.getFullYear(), current.getMonth() + 1, 0));
+    return exp.filter(expense => {
+      const expenseDate = normalizeDate(new Date(expense.date.split('-').reverse().join('-')));
+      return expenseDate >= monthStart && expenseDate <= monthEnd;
+    });
   }
   return [];
 };
