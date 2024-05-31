@@ -5,7 +5,7 @@ import PropType from 'prop-types';
 import Button from '@mui/material/Button';
 import Card from './Card';
 import SummaryCard from "./SummaryCard";
-import { calculateSummary } from "../utils/componentsUtils";
+import { calculateSummary, filteredExpenses } from "../utils/componentsUtils";
 
 
 
@@ -22,51 +22,7 @@ const Intro = (props) => {
   }
 
 
-  const formatDate = (date) => {
-    const d = new Date(date);
-    const day = String(d.getDate()).padStart(2, '0');
-    const month = String(d.getMonth() + 1).padStart(2, '0');
-    const year = d.getFullYear();
-    return `${day}-${month}-${year}`;
-  };
-
-
-  const filteredExpenses = () => {
-    const today = formatDate(new Date());
-
-
-    const current = new Date();
-    const weekStart = new Date(current.setDate(current.getDate() - current.getDay()));
-    const weekEnd = new Date(current.setDate(current.getDate() - current.getDay() + 6));
-
-
-    const monthStart = new Date();
-    monthStart.setDate(1);
-    const monthEnd = new Date(monthStart.getFullYear(), monthStart.getMonth() + 1, 0);
-
-
  
-
-
-    if (props.exp) {
-      if (activeButton === 'today') {
-        return props.exp.filter(expense => expense.date === today);
-      } else if (activeButton === 'week') {
-        return props.exp.filter(expense => {
-          const [day, month, year] = expense.date.split('-');
-          const expenseDate = new Date(`${year}-${month}-${day}`);
-          return expenseDate >= weekStart && expenseDate <= weekEnd;
-        });
-      } else if (activeButton === 'month') {
-        return props.exp.filter(expense => {
-          const [day, month, year] = expense.date.split('-');
-          const expenseDate = new Date(`${year}-${month}-${day}`);
-          return expenseDate >= monthStart && expenseDate <= monthEnd;
-        });
-      }
-    }
-    return [];
-  };
 
 
   const handleChangeSummary = () =>{
@@ -77,7 +33,7 @@ const Intro = (props) => {
 
 
 
-  const filteredExp = filteredExpenses();
+  const filteredExp = filteredExpenses(props.exp, activeButton);
   const summaryData = calculateSummary(filteredExp);
  
 

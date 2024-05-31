@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import {StyleSheet, css} from "aphrodite"
 import { useLogoutMutation } from '../slice/userApiSlice';
 import {clearCredentials} from '../slice/auth';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, Link} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 const Nav = () => {
@@ -25,7 +25,9 @@ const Nav = () => {
   return (
     <div className={css(styles.nav)}>
       <div>
-      <img src={icon} alt="logo" />
+        <Link to='/'>
+          <img src={icon} alt="logo" />
+        </Link>
       </div>
       <div>
       <Button variant="outlined" onClick={handleLogout}>Logout</Button>
