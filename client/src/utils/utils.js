@@ -34,7 +34,7 @@ export const toTitleCase = (str) => {
         total += element.amount
       })
     } else{
-      console.warn('Error data is not an array or equal to null')
+      return total
     }
    
     return total
@@ -43,7 +43,7 @@ export const toTitleCase = (str) => {
 
   export const toMoney = (amount) =>{
     if (isNaN(amount)){
-      return '0.00'
+      return '0'
     }
     const formattedAmount = amount.toFixed(0)
     return formattedAmount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
