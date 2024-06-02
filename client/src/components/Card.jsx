@@ -20,7 +20,7 @@ const Card = (props) => {
         try {
             await deleteExpense(id).unwrap();
             toast.success('Expense deleted')
-            navigate('/')
+            navigate('/login')
         } catch (err) {
             toast.error(err?.data?.message)
         }

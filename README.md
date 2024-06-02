@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Expenses_Tracker
 alt text](icon.svg)
 Expenses Tracker is a web application that allows users to monitor their spending habits and make informed financial decisions. Users can add, view, and filter their expenses based on different time periods such as today, this week, or this month.
@@ -91,3 +92,6 @@ cd Expenses_Tracker
 
 
 #### Client
+=======
+# Expenses Tracker
+>>>>>>> 4bfb9144a294f84244b55604f19cf4c8f77c7ed7
