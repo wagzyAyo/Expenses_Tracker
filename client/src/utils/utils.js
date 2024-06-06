@@ -29,9 +29,13 @@ export const toTitleCase = (str) => {
     let total = 0;
 
 
+
+
     if(Array.isArray(data)){
       data.forEach(element => {
-        total += element.amount
+        if(element.amount){
+          total += element.amount
+        }
       })
     } else{
       return total
@@ -41,8 +45,9 @@ export const toTitleCase = (str) => {
   }
 
 
+
   export const toMoney = (amount) =>{
-    if (isNaN(amount)){
+    if (amount === null || isNaN(amount)){
       return '0'
     }
     const formattedAmount = amount.toFixed(0)
