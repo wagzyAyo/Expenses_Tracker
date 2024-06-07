@@ -35,10 +35,11 @@ test('Convert string input to string comma separated money form', () => {
 
 
 test('Convert null input to string comma separated money form', () => {
-    expect(toMoney(null)).toBe('NaN');
+    expect(toMoney(null)).toBe('0');
 });
 
 
 test('Convert undefined input to string comma separated money form', () => {
     expect(toMoney(undefined)).toBe('0');
 });
+
