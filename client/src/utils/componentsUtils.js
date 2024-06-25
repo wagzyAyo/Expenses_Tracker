@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 export const calculateSummary = (expenses) => {
     return expenses.reduce((acc, expense) => {
       if (!acc[expense.category]) {
@@ -19,16 +21,18 @@ const formatDate = (date) => {
 
 // Helper function to normalize date to the start of the day
 const normalizeDate = (date) => {
-  return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  return dayjs(date).startOf('day');
 };
 
 // Main function to filter expenses based on the active button
-export const filteredExpenses = (exp, activeButton) => {
+export const filteredExpenses = (exp, activeButton, date) => {
   if (!exp) return [];
 
   const today = formatDate(new Date());
-
-  if (activeButton === 'today') {
+  if (activeButton === "custom" && date){
+    return exp.filter(expense => normalizeDate(dayjs(expense.date, 'DD-MM-YYYY')).isSame(date, 'day'));
+  }
+  else if (activeButton === 'today') {
     return exp.filter(expense => expense.date === today);
   } else if (activeButton === 'week') {
     const current = new Date();

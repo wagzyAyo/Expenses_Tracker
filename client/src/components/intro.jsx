@@ -5,7 +5,13 @@ import PropType from 'prop-types';
 import Button from '@mui/material/Button';
 import Card from './Card';
 import SummaryCard from "./SummaryCard";
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { calculateSummary, filteredExpenses } from "../utils/componentsUtils";
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import dayjs from 'dayjs';
+
 
 
 
@@ -13,11 +19,16 @@ import { calculateSummary, filteredExpenses } from "../utils/componentsUtils";
 const Intro = (props) => {
   const [activeButton, setActiveButton] = useState("today");
   const [summary, setSummary] = useState(false)
+  const [date, setDate] = useState(dayjs())
 
 
 
 
-  const handleClick = (ButtonName)=> {
+  const handleClick = (ButtonName, date = null)=> {
+    if (date){
+      setActiveButton("custom")
+      setDate(date)
+    }
     setActiveButton(ButtonName)
   }
 
@@ -33,7 +44,7 @@ const Intro = (props) => {
 
 
 
-  const filteredExp = filteredExpenses(props.exp, activeButton);
+  const filteredExp = filteredExpenses(props.exp, activeButton, date);
   const summaryData = calculateSummary(filteredExp);
  
 
@@ -68,7 +79,7 @@ const Intro = (props) => {
     >
       <h1 className="text-4xl font-bold text-gray-900">{greeting} {props.firstName}</h1>
       <p className="text-slate-300 my-7">Monitor your spending habit and make right financial decisions.</p>
-      <div className="mt-10 flex justify-between">
+      <div className="mt-10 flex justify-between flex-wrap">
         <div className="px-3">
           <Button
           variant={activeButton === "today" ? "contained" : "outlined"}
@@ -82,6 +93,25 @@ const Intro = (props) => {
           variant={activeButton === "month" ? "contained" : "outlined"}
           sx={activeButton === 'month' ? customButtonStyle.contained : customButtonStyle.outlined}
           onClick={()=> handleClick("month")}>This Month</Button>
+
+
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DemoContainer components={['DatePicker']} >
+              <DatePicker
+                name='date'
+                value={date}
+                id='date'
+                onChange={(newValue) => {
+                  const selectedDate = dayjs(newValue)
+                  handleClick('custom', selectedDate)
+                }
+                }
+                format='DD-MM-YYYY'
+              />
+            </DemoContainer>
+            </LocalizationProvider>
+
+            
         </div>
         <div>
           <Link to='/addnew'>
