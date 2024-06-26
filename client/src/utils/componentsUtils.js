@@ -11,46 +11,38 @@ export const calculateSummary = (expenses) => {
   };
 
  
-// Helper function to format date in DD-MM-YYYY format
-const formatDate = (date) => {
-  const day = String(date.getDate()).padStart(2, '0');
-  const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
-  const year = date.getFullYear();
-  return `${day}-${month}-${year}`;
-};
 
 // Helper function to normalize date to the start of the day
 const normalizeDate = (date) => {
-  return dayjs(date).startOf('day');
+  return date.startOf('day');
 };
 
 // Main function to filter expenses based on the active button
 export const filteredExpenses = (exp, activeButton, date) => {
   if (!exp) return [];
 
-  const today = formatDate(new Date());
-  if (activeButton === "custom" && date){
-    return exp.filter(expense => normalizeDate(dayjs(expense.date, 'DD-MM-YYYY')).isSame(date, 'day'));
-  }
-  else if (activeButton === 'today') {
-    return exp.filter(expense => expense.date === today);
+  const today = normalizeDate(dayjs());
+
+  if (activeButton === "custom" && date) {
+    const normalizedDate = normalizeDate(date);
+    return exp.filter(expense => normalizeDate(dayjs(expense.date, 'DD-MM-YYYY')).isSame(normalizedDate, 'day'));
+  } else if (activeButton === 'today') {
+    return exp.filter(expense => normalizeDate(dayjs(expense.date, 'DD-MM-YYYY')).isSame(today, 'day'));
   } else if (activeButton === 'week') {
-    const current = new Date();
-    const weekStart = normalizeDate(new Date(current.setDate(current.getDate() - current.getDay())));
-    const weekEnd = normalizeDate(new Date(weekStart));
-    weekEnd.setDate(weekStart.getDate() + 6);
+    const weekStart = today.startOf('week');
+    const weekEnd = today.endOf('week');
     return exp.filter(expense => {
-      const expenseDate = normalizeDate(new Date(expense.date.split('-').reverse().join('-')));
-      return expenseDate >= weekStart && expenseDate <= weekEnd;
+      const expenseDate = normalizeDate(dayjs(expense.date, 'DD-MM-YYYY'));
+      return expenseDate.isAfter(weekStart) && expenseDate.isBefore(weekEnd);
     });
   } else if (activeButton === 'month') {
-    const current = new Date();
-    const monthStart = normalizeDate(new Date(current.getFullYear(), current.getMonth(), 1));
-    const monthEnd = normalizeDate(new Date(current.getFullYear(), current.getMonth() + 1, 0));
+    const monthStart = today.startOf('month');
+    const monthEnd = today.endOf('month');
     return exp.filter(expense => {
-      const expenseDate = normalizeDate(new Date(expense.date.split('-').reverse().join('-')));
-      return expenseDate >= monthStart && expenseDate <= monthEnd;
+      const expenseDate = normalizeDate(dayjs(expense.date, 'DD-MM-YYYY'));
+      return expenseDate.isAfter(monthStart) && expenseDate.isBefore(monthEnd);
     });
   }
+
   return [];
 };
