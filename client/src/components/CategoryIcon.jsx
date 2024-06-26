@@ -53,7 +53,8 @@ const styleSheet = StyleSheet.create({
         width: '25px',
         height: '25px',
         borderRadius: '50%',
-        backgroundColor: '#D9D9D9'
+        backgroundColor: '#D9D9D9',
+        margin: "0 5px",
     },
     foodIcon: {
         color: 'green'
