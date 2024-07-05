@@ -4,6 +4,7 @@ const authenticateToken = require('../utils/authToken');
 
 
 //Add budget
+//Api prefix /api/budget
 route.post('/', authenticateToken, async (req, res)=>{
     const {category, amount} = req.body;
 
@@ -25,3 +26,5 @@ route.post('/', authenticateToken, async (req, res)=>{
     }
     
 })
+
+module.exports = route;
