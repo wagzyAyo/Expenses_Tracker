@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const expenseSchema = require('./expense')
+const budgetSchema = require('./budget')
 
 const userSchema = mongoose.Schema({
     firstName: {
@@ -19,7 +20,8 @@ const userSchema = mongoose.Schema({
         required: true,
         type: String,
     },
-    Expenses: [expenseSchema]
+    Expenses: [expenseSchema],
+    Budget: [budgetSchema]
 })
 
 const User = mongoose.model("users", userSchema)
