@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser')
 const cors = require('cors')
 require('dotenv').config()
 const dataRouter = require('./Routes/data');
-const budgetRouter = require('./Routes/userProfile')
+const budgetRouter = require('./Routes/budget')
 
 const port = process.env.PORT || 5000
 const app = express()

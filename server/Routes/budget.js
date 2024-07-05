@@ -1,6 +1,7 @@
 const express = require("express");
 const route = express.Router();
 const authenticateToken = require('../utils/authToken');
+const mongoose = require("mongoose")
 
 
 //Add budget
@@ -54,7 +55,7 @@ route.put('/:id/update', authenticateToken, async(req, res)=>{
             }
             
         });
-        if(!budgetFound){
+        if(budgetFound){
             await user.save()
             return res.status(201).json({message: "Budget updated suuccessfully"})
         }
@@ -62,6 +63,28 @@ route.put('/:id/update', authenticateToken, async(req, res)=>{
         console.log(`Error updating budget ${err}`)
         return res.status(500).json({message: "Internal server error"})
      }
+});
+
+route.delete('/:id', authenticateToken, async(req,res)=>{
+    const {id} = req.params;
+    const user = req.user
+    try {
+        const budgetItem = user.Budget;
+        const budgetId = new mongoose.Types.ObjectId(id);
+
+        const budgetIndex = budgetItem.findIndex(budget => budget._id.equals(budgetId))
+        if (budgetIndex !== -1){
+            budgetItem.splice(budgetIndex, 1);
+            await user.save();
+            return res.status(201).json({message: "Default Budget deleted successfully "})
+        }else{
+            return res.status(404).json({message: "No budget found"})
+        }
+
+    } catch (err) {
+        console.log(`Error deleting budget item ${err}`);
+        return res.status(500).json({message: "Internal server error"})
+    }
 })
 
 module.exports = route;
