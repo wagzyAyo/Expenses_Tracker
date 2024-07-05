@@ -14,15 +14,22 @@ route.post('/', authenticateToken, async (req, res)=>{
     try {
         const user = req.user
         if(!user){
-            res.status(401).json({message: "Unathorized: User not found"})
+            return res.status(401).json({message: "Unathorized: User not found"})
+        }
+        
+        const userBudget = user.Budget
+        for(let i =0; i < userBudget.length; i++){
+            if (userBudget[i].category === category){
+                return res.status(401).json({message: `Default budget for ${category} exist please update the budget instead`})
+            }
         }
         const newBudget = {category, amount};
         user.Budget.push(newBudget);
         await user.save()
-        res.status(201).json({message: "Budget added successfully"})
+        return res.status(201).json({message: "Budget added successfully"})
     } catch (err) {
         console.log(`Error adding new budget ${err}`);
-        res.status(500).json({message: "Internal server error"})
+        return res.status(500).json({message: "Internal server error"})
     }
     
 })
