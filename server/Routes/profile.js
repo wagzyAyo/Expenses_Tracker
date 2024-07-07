@@ -44,6 +44,9 @@ route.put('/', authenticateToken, async (req, res)=>{
 
 });
 
+
+//Change password route
+//prefix /api/updateprofile/password
 route.put('/password', authenticateToken, async (req, res)=>{
     const {email, oldPassword, newPassword} = req.body;
     const user = await userModel.findOne({email})
@@ -68,6 +71,21 @@ route.put('/password', authenticateToken, async (req, res)=>{
     } catch (err) {
         console.log(`Error updating user password ${err}`);
         return res.status(500).json({message: "Internal server error"})
+    }
+});
+
+//Delete account api
+//prefix /api/updateprofile/delete
+route.delete('/delete', authenticateToken, async (req, res)=>{
+    const user = req.user;
+    const email = user.email;
+
+    try {
+        await userModel.findOneAndDelete({email});
+        return res.status(200).json({message: "Account deleted"})
+    } catch (err) {
+        console.log(`Error deleting account ${err}`);
+        return res.status(500).json({message: "internal server error"})
     }
 })
 
