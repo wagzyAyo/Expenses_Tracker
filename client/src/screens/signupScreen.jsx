@@ -16,6 +16,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setCredentials } from '../slice/auth';
 import {toast} from 'react-toastify';
 import { useSignupMutation } from '../slice/userApiSlice';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import { currencySymbols } from '../utils/currencySymbols';
 
 
 
@@ -26,7 +29,8 @@ const SignupScreen = () => {
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("")
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [currency, setCurrency] = useState("")
 
 
     const navigate = useNavigate();
@@ -64,7 +68,7 @@ const SignupScreen = () => {
         dispatch(setCredentials(res))
         navigate('/dashboard')
         } catch (err) {
-            console.log(err)
+            toast.error("Error creating user, Email already exist")
         }
     }
   }
@@ -113,6 +117,23 @@ const SignupScreen = () => {
                 autoComplete='email'
                 />
 
+        <InputLabel id="demo-simple-select-label"></InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="category"
+          name='category'
+          value={currency}
+          label="currency"
+          onChange={(e)=> setCurrency(e.target.value)}
+        >
+            <MenuItem value="" disabled>
+              Currency Symbol
+            </MenuItem>
+          {currencySymbols.map(symbol =>{
+            return <MenuItem key={symbol} value={symbol}>{symbol}</MenuItem>
+          })}
+          
+        </Select>
 
                 <FormControl sx={{ m: 1, width: '350px' }} variant="outlined">
                     <InputLabel htmlFor="password">Password</InputLabel>

@@ -49,7 +49,7 @@ router.post('/login', async (req, res)=>{
 //Sign up route
 //prefix- /api
 router.post('/signup', async (req, res)=>{
-    const {firstName, lastName, email, password}  = req.body;
+    const {firstName, lastName, email, password, currency}  = req.body;
     if (!firstName || !lastName || !email || !password){
         //res.send({message: "Include firstName, lastName, email & password in the body"})
         console.log('Signup route no params')
@@ -62,6 +62,7 @@ router.post('/signup', async (req, res)=>{
                     firstName,
                     lastName,
                     email,
+                    Currency: currency,
                     password: newPassword,
                 })
                 await newUser.save()
@@ -76,7 +77,7 @@ router.post('/signup', async (req, res)=>{
                     Expenses: user.Expenses})
             } catch(err){
                 console.log(`Error creating user, duplicate email: ${err}`)
-                res.status(401).json({message: 'Error creating user, duplicate email'})
+                res.status(400).json({message: 'Error creating user, duplicate email'})
             }
         }
     
