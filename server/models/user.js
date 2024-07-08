@@ -20,8 +20,9 @@ const userSchema = mongoose.Schema({
         required: true,
         type: String,
     },
+    Currency: String,
     Expenses: [expenseSchema],
-    Budget: [budgetSchema]
+    Budget: [budgetSchema],
 })
 
 const User = mongoose.model("users", userSchema)

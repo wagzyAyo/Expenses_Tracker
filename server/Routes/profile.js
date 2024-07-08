@@ -2,14 +2,14 @@ const express = require("express");
 const route = express.Router();
 const authenticateToken = require("../utils/authToken")
 const bcrypt = require("bcryptjs");
-const userModel = require("../models/user")
+const userModel = require("../models/user");
 
 
 //update profile
 //prefix  api/updateprofile
 route.put('/', authenticateToken, async (req, res)=>{
     
-    const {firstName, lastName, email, password} = req.body;
+    const {firstName, lastName, email,currency, password} = req.body;
     const user = await userModel.findOne({email})
     
 
@@ -33,6 +33,7 @@ route.put('/', authenticateToken, async (req, res)=>{
         user.firstName = firstName;
         user.lastName = lastName;
         user.email = email;
+        user.Currency = currency
         await user.save()
         return res.status(200).json({message: "Profile updated successfully"})
     } catch (err) {
