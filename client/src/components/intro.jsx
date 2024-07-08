@@ -38,7 +38,7 @@ const Intro = (props) => {
 
   const handleChangeSummary = () =>{
     setSummary(!summary)
-    console.log(summary)
+    //console.log(summary)
   }
 
 
@@ -127,7 +127,7 @@ const Intro = (props) => {
         </div>
       </div>
       <div className="mt-10">
-        <b>NetSpend:</b> {toMoney(netSpend(filteredExp))}
+        <b>NetSpend:</b> <b>{props.currency}</b>{toMoney(netSpend(filteredExp))}
       </div>
       {summary ? (
         filteredExp.length > 0 ? (
@@ -170,6 +170,7 @@ Intro.propTypes = {
     amount: PropType.number.isRequired,
     date: PropType.string.isRequired,
   })),
+  currency: PropType.string.isRequired
 }
 
 

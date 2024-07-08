@@ -35,7 +35,7 @@ const UserDashboard = () => {
         </>)
         :
         (<>
-        <Intro firstName={toTitleCase(data?.firstName)} exp={data?.Expenses}/>
+        <Intro firstName={toTitleCase(data?.firstName)} exp={data?.Expenses} currency={data?.Currency}/>
         </>)
        
       }
