@@ -13,6 +13,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
 import Button from '@mui/material/Button';
 import { StyleSheet, css } from 'aphrodite';
+import expenseList from '../utils/expenseList';
 
 
 
@@ -70,7 +71,10 @@ const ExpenseForm = (props) => {
           label="category"
           onChange={(e)=> setCategory(e.target.value)}
         >
-          <MenuItem value="Transport">Transport</MenuItem>
+          {expenseList.map(expense =>{
+            return <MenuItem key={expense} value={expense}>{expense}</MenuItem>
+          })}
+          {/* <MenuItem value="Transport">Transport</MenuItem>
           <MenuItem value="Food">Food</MenuItem>
           <MenuItem value="Cable bill">Cable bill</MenuItem>
           <MenuItem value="Electricity bill">Electricity bill</MenuItem>
@@ -79,7 +83,7 @@ const ExpenseForm = (props) => {
           <MenuItem value="Travel">Travel</MenuItem>
           <MenuItem value="Gadget">Gadget</MenuItem>
           <MenuItem value="Miscellaneous">Miscellaneous</MenuItem>
-          <MenuItem value="Others">Others</MenuItem>
+          <MenuItem value="Others">Others</MenuItem> */}
           
         </Select>
       
