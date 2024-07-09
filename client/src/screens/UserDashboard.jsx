@@ -29,7 +29,7 @@ const UserDashboard = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <main className="flex-grow">
-        <Nav />
+        <Nav firstName={data?.firstName} lastName={data?.lastName}/>
         { isLoading ? (<>
         <Loader />
         </>)

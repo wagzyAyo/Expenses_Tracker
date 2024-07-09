@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import icon from '/icon.svg'
 import Button from '@mui/material/Button';
 import {StyleSheet, css} from "aphrodite"
@@ -5,8 +6,23 @@ import { useLogoutMutation } from '../slice/userApiSlice';
 import {clearCredentials} from '../slice/auth';
 import {useNavigate, Link} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import PropType from 'prop-types';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
-const Nav = () => {
+
+
+const Nav = (props) => {
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const navigate = useNavigate();
   const dispatch = useDispatch()
@@ -30,7 +46,28 @@ const Nav = () => {
         </Link>
       </div>
       <div>
-      <Button variant="outlined" onClick={handleLogout}>Logout</Button>
+      <Button
+        variant="outlined"
+        id="basic-button"
+        aria-controls={open ? 'basic-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleClick}
+      >
+        {props.firstName} {props.lastName}<ArrowDropDownIcon/>
+      </Button>
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+      >
+        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+      </Menu>
       </div>
      
     </div>
@@ -48,6 +85,10 @@ const styles = StyleSheet.create({
   }
 })
 
+Nav.propTypes = {
+  firstName : PropType.string,
+  lastName: PropType.string
+}
 
 export default Nav
 
