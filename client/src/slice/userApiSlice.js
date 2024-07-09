@@ -62,6 +62,13 @@ export const userApiSlice = apiSlice.injectEndpoints({
                 method: "PUT",
                 body: data
             })
+        }),
+        deleteAccount: builder.mutation({
+            query: ({data}) => ({
+                url: `${USER_URL}/updateprofile/delete`,
+                method: "DELETE",
+                body: data
+            })
         })
     }),
 });
@@ -75,5 +82,6 @@ export const {
     useDeleteExpenseMutation,
     useUpdateExpenseMutation,
     useUpdateprofileMutation,
-    useUpdatePasswordMutation
+    useUpdatePasswordMutation,
+    useDeleteAccountMutation
 } = userApiSlice
