@@ -70,6 +70,20 @@ export const userApiSlice = apiSlice.injectEndpoints({
                 body: data
             })
         }),
+        updateBudget: builder.mutation({
+            query: ({params, data}) => ({
+                url: `${USER_URL}/budget/${params}/update`,
+                method: "PUT",
+                body: data
+            })
+        }),
+        deleteBudget: builder.mutation({
+            query: ({params, data}) => ({
+                url: `${USER_URL}/budget/${params}`,
+                method: "DELETE",
+                body: data
+            })
+        }),
         deleteAccount: builder.mutation({
             query: ({data}) => ({
                 url: `${USER_URL}/updateprofile/delete`,
@@ -91,5 +105,7 @@ export const {
     useUpdateprofileMutation,
     useUpdatePasswordMutation,
     useAddBudgetMutation,
+    useUpdateBudgetMutation,
+    useDeleteBudgetMutation,
     useDeleteAccountMutation
 } = userApiSlice

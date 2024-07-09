@@ -35,7 +35,7 @@ route.post('/', authenticateToken, async (req, res)=>{
     
 });
 
-
+//api prefix api/budget/id/update
 route.put('/:id/update', authenticateToken, async(req, res)=>{
     const user = req.user
     const {id} = req.params;
@@ -65,6 +65,8 @@ route.put('/:id/update', authenticateToken, async(req, res)=>{
      }
 });
 
+//dlete budget
+//api prefix api/budget/id
 route.delete('/:id', authenticateToken, async(req,res)=>{
     const {id} = req.params;
     const user = req.user
