@@ -19,6 +19,7 @@ import LoginScreen from './screens/loginScreen.jsx'
 import SignupScreen from './screens/signupScreen.jsx';
 import AddNewExpense from './screens/AddNewExpense.jsx';
 import UpdateExpense from './screens/UpdateExpense.jsx';
+import ProfileScreen from './screens/ProfileScreen.jsx';
 import PrivateRoute from './components/privateRoute.jsx';
 
 
@@ -34,6 +35,7 @@ const router = createBrowserRouter(
         <Route path='/dashboard' element={<UserDashboard />}></Route>
         <Route path='/addnew' element={<AddNewExpense />}></Route>
         <Route path='/update/:id' element={<UpdateExpense />}></Route>
+        <Route path='/profile' element={<ProfileScreen />}></Route>
         </Route>
     </Route>
   )
