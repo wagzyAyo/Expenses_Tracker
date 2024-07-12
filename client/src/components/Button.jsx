@@ -12,6 +12,7 @@ const styleSheet = StyleSheet.create({
         padding: '10px 20px',
         borderRadius: '5px',
         cursor: 'pointer',
+        marginTop: "20px"
     }
 })
 
@@ -26,7 +27,7 @@ const styleSheet = StyleSheet.create({
 
 CustomButton.propTypes = {
     name: PropType.string,
-    colorType: PropType.oneOf(['blue', 'red', 'border']).isRequired,
+    colorType: PropType.oneOf(['#143BA0', '#E61313', 'border']).isRequired,
 }
 
 export default CustomButton

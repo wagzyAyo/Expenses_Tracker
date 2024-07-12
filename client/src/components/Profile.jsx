@@ -4,7 +4,7 @@ import PropType from 'prop-types'
 const Profile = (props) => {
   return (
     <div>
-      <h1>USer Profile</h1>
+      <h1>User Profile</h1>
       <label htmlFor="">firstName</label>
       <ProfileInput value={props.firstName}/>
       <label htmlFor="">lastName</label>
