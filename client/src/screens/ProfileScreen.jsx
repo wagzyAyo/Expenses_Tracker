@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import Profile from "../components/Profile";
+import Nav from "../components/nav";
 import Loader from "../components/loader";
 import { useUserDataMutation } from "../slice/userApiSlice"; 
+import { Button } from "@material-tailwind/react";
 
 
 const ProfileScreen = () => {
@@ -29,11 +31,16 @@ const ProfileScreen = () => {
         <Loader />
       </>)
       :
-      (<Profile 
-        firstName={data?.firstName} 
-        lastName={data?.lastName}
-        email={data?.email}
-        />
+      (
+        <>
+          <Nav firstName={data?.firstName} lastName={data?.lastName} />
+          <Profile 
+            firstName={data?.firstName} 
+            lastName={data?.lastName}
+            email={data?.email}
+            />
+            <Button variant="contained">Update Profile</Button>
+        </>
       )}
       
     </div>
