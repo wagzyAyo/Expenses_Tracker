@@ -1,6 +1,7 @@
 import ProfileInput from "./profileInput"
 import PropType from 'prop-types';
 import CustomButton from "./Button";
+import { Link } from "react-router-dom";
 
 const Profile = (props) => {
   return (
@@ -12,7 +13,9 @@ const Profile = (props) => {
       <ProfileInput value={props.lastName}/>
       <label htmlFor="">Email</label>
       <ProfileInput value={props.email}/>
+      <Link to={"/updateprofile"}>
       <CustomButton name={"Update Profile"} colorType="#143BA0"/>
+      </Link >
       <CustomButton name={"Change Password"} colorType="border"/>
       <CustomButton name={"Add Budget"} colorType="border"/>
       <CustomButton name={"Delete Account"} colorType="#E61313"/>
