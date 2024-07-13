@@ -3,7 +3,6 @@ import Profile from "../components/Profile";
 import Nav from "../components/nav";
 import Loader from "../components/loader";
 import { useUserDataMutation } from "../slice/userApiSlice"; 
-import CustomButton from "../components/Button";
 import { StyleSheet, css } from "aphrodite";
 
 
@@ -41,10 +40,7 @@ const ProfileScreen = () => {
             lastName={data?.lastName}
             email={data?.email}
             />
-            <CustomButton name={"Update Profile"} colorType="#143BA0"/>
-            <CustomButton name={"Change Password"} colorType="border"/>
-            <CustomButton name={"Add Budget"} colorType="border"/>
-            <CustomButton name={"Delete Account"} colorType="#E61313"/>
+            
             </div>
         </ div>
       )}

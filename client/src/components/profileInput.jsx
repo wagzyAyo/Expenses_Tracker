@@ -20,6 +20,7 @@ const styleSheet = StyleSheet.create({
         border: "1px solid gray",
         borderRadius: "4px",
         fontWeight: "500",
+        color: "gray"
     }
 })
 

@@ -1,5 +1,6 @@
 import ProfileInput from "./profileInput"
-import PropType from 'prop-types'
+import PropType from 'prop-types';
+import CustomButton from "./Button";
 
 const Profile = (props) => {
   return (
@@ -11,6 +12,10 @@ const Profile = (props) => {
       <ProfileInput value={props.lastName}/>
       <label htmlFor="">Email</label>
       <ProfileInput value={props.email}/>
+      <CustomButton name={"Update Profile"} colorType="#143BA0"/>
+      <CustomButton name={"Change Password"} colorType="border"/>
+      <CustomButton name={"Add Budget"} colorType="border"/>
+      <CustomButton name={"Delete Account"} colorType="#E61313"/>
     </div>
   )
 }
