@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
 import UpdateProfile from "../components/UpdateProfile"
 import Nav from "../components/nav";
-import { useUserDataMutation } from "../slice/userApiSlice";
+import { useUserDataMutation, useUpdateprofileMutation } from "../slice/userApiSlice";
 import Footer from "../components/footer";
+import { toast } from "react-toastify";
 
 const UpdateProfileScreen = () => {
 
     const [data, setData] = useState("");
  
   const [userData, ] = useUserDataMutation();
+  const [updateProfile] = useUpdateprofileMutation();
 
 
  useEffect(()=>{
@@ -21,11 +23,23 @@ const UpdateProfileScreen = () => {
     }
   }
  fecthData();
- },[userData])
+ },[userData]);
+ 
+ const handleSubmit = async (profileData)=>{
+    try {
+        await updateProfile(profileData).unwrap();
+        toast.success("Profile Updated")
+    } catch (err) {
+        toast.error(err?.message)
+        console.log(`Error sending request ${err}`)
+    }
+    
+ }
+
   return (
     <div>
         <Nav />
-        <UpdateProfile initialValues={data} />
+        <UpdateProfile initialValues={data} onSubmit={handleSubmit} />
         <Footer />
     </div>
   )
