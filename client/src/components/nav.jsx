@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect} from 'react';
 import icon from '/icon.svg'
 import Button from '@mui/material/Button';
 import {StyleSheet, css} from "aphrodite"
@@ -8,12 +8,30 @@ import {useNavigate, Link} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import PropType from 'prop-types';
+//import PropType from 'prop-types';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { useUserDataMutation } from '../slice/userApiSlice';
 
 
 
-const Nav = (props) => {
+const Nav = () => {
+
+  const [data, setData] = useState("");
+ 
+  const [userData] = useUserDataMutation();
+
+
+ useEffect(()=>{
+  const fecthData = async ()=>{
+    try {
+      const response = await userData().unwrap()
+      setData(response.user)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+ fecthData();
+ },[userData])
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -54,7 +72,7 @@ const Nav = (props) => {
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-        {props.firstName} {props.lastName}<ArrowDropDownIcon/>
+        {data.firstName} {data.lastName}<ArrowDropDownIcon/>
       </Button>
       <Menu
         id="basic-menu"
@@ -87,10 +105,10 @@ const styles = StyleSheet.create({
   }
 })
 
-Nav.propTypes = {
-  firstName : PropType.string,
-  lastName: PropType.string
-}
+// Nav.propTypes = {
+//   firstName : PropType.string,
+//   lastName: PropType.string
+// }
 
 export default Nav
 

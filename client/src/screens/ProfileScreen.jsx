@@ -4,6 +4,7 @@ import Nav from "../components/nav";
 import Loader from "../components/loader";
 import { useUserDataMutation } from "../slice/userApiSlice"; 
 import { StyleSheet, css } from "aphrodite";
+import Footer from "../components/footer";
 
 
 const ProfileScreen = () => {
@@ -42,6 +43,7 @@ const ProfileScreen = () => {
             />
             
             </div>
+            <Footer />
         </ div>
       )}
       
