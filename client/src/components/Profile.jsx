@@ -19,7 +19,9 @@ const Profile = (props) => {
       <Link to={"/updatepassword"}>
       <CustomButton name={"Change Password"} colorType="border"/>
       </Link>
+      <Link to={"/addbudget"}>
       <CustomButton name={"Add Budget"} colorType="border"/>
+      </Link>
       <CustomButton name={"Delete Account"} colorType="#E61313"/>
     </div>
   )
