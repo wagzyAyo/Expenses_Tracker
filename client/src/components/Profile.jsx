@@ -1,9 +1,25 @@
 import ProfileInput from "./profileInput"
 import PropType from 'prop-types';
+import { useDeleteAccountMutation } from "../slice/userApiSlice";
 import CustomButton from "./Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { Button } from "@mui/material";
+import { StyleSheet, css } from "aphrodite";
 
 const Profile = (props) => {
+  const [deleteAccount] = useDeleteAccountMutation();
+  const navigate = useNavigate()
+
+  const handleDeleteAccount = async ()=>{
+    try {
+      await deleteAccount().unwrap();
+      toast.success("Account deleted")
+      navigate('/')
+    } catch (err) {
+      console.log(`Error deleting account {err}`)
+    }
+  }
   return (
     <div>
       <h1>User Profile</h1>
@@ -22,10 +38,21 @@ const Profile = (props) => {
       <Link to={"/addbudget"}>
       <CustomButton name={"Add Budget"} colorType="border"/>
       </Link>
-      <CustomButton name={"Delete Account"} colorType="#E61313"/>
+      <Button className={css(styleSheet.btn)} onClick={handleDeleteAccount}>
+        DeleteAccount
+        </Button>
     </div>
   )
 }
+
+const styleSheet = StyleSheet.create({
+  btn: {
+    background: "red",
+    border: "none",
+    color: "white",
+    marginTop: "10px",
+  }
+})
 
 Profile.propTypes = {
   firstName : PropType.string,

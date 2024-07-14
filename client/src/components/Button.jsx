@@ -2,7 +2,11 @@ import { StyleSheet, css } from "aphrodite";
 import PropType from "prop-types"
 
 const CustomButton = (props) => {
-const {name, colorType} = props;
+const {name, colorType, handleClick} = props;
+
+const handleSomething = ()=>{
+  handleClick
+}
 
 const styleSheet = StyleSheet.create({
     color: {
@@ -18,7 +22,7 @@ const styleSheet = StyleSheet.create({
 
   return (
     <div>
-      <button className={css(styleSheet.color)}>{name}</button>
+      <button className={css(styleSheet.color)} onClick={handleSomething}>{name}</button>
     </div>
   )
 }
@@ -28,6 +32,7 @@ const styleSheet = StyleSheet.create({
 CustomButton.propTypes = {
     name: PropType.string,
     colorType: PropType.oneOf(['#143BA0', '#E61313', 'border']).isRequired,
+    handleClick: PropType.func.isRequired
 }
 
 export default CustomButton

@@ -49,49 +49,10 @@ export const userApiSlice = apiSlice.injectEndpoints({
                 body: data,
             })
         }),
-        updateprofile: builder.mutation({
-            query: ({data}) => ({
-                url: `${USER_URL}/updateprofile`,
-                method: 'PUT',
-                body: data
-            })
-        }),
-        updatePassword: builder.mutation({
-            query: ({data}) => ({
-                url: `${USER_URL}/updateprofile/password`,
-                method: "PUT",
-                body: data
-            })
-        }),
-        addBudget: builder.mutation({
-            query: (data) => {
-                console.log("Sending data:", data); // Correct logging inside the function
-                return {
-                    url: `${USER_URL}/budget`,
-                    method: "POST",
-                    body: data
-                };
-            }
-        }),
-        updateBudget: builder.mutation({
-            query: ({params, data}) => ({
-                url: `${USER_URL}/budget/${params}/update`,
-                method: "PUT",
-                body: data
-            })
-        }),
-        deleteBudget: builder.mutation({
-            query: ({params, data}) => ({
-                url: `${USER_URL}/budget/${params}`,
-                method: "DELETE",
-                body: data
-            })
-        }),
         deleteAccount: builder.mutation({
-            query: ({data}) => ({
+            query: () => ({
                 url: `${USER_URL}/updateprofile/delete`,
                 method: "DELETE",
-                body: data
             })
         })
     }),
@@ -105,10 +66,5 @@ export const {
     useAddExpenseMutation,
     useDeleteExpenseMutation,
     useUpdateExpenseMutation,
-    useUpdateprofileMutation,
-    useUpdatePasswordMutation,
-    useAddBudgetMutation,
-    useUpdateBudgetMutation,
-    useDeleteBudgetMutation,
     useDeleteAccountMutation
 } = userApiSlice
