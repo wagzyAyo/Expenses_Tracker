@@ -46,7 +46,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
             query: ({params, data}) => ({
                 url: `${USER_URL}/data/${params}/update`,
                 method: 'PUT',
-                body: data
+                body: data,
             })
         }),
         updateprofile: builder.mutation({
@@ -64,11 +64,14 @@ export const userApiSlice = apiSlice.injectEndpoints({
             })
         }),
         addBudget: builder.mutation({
-            query: ({data}) => ({
-                url: `${USER_URL}/budget`,
-                method: "POST",
-                body: data
-            })
+            query: (data) => {
+                console.log("Sending data:", data); // Correct logging inside the function
+                return {
+                    url: `${USER_URL}/budget`,
+                    method: "POST",
+                    body: data
+                };
+            }
         }),
         updateBudget: builder.mutation({
             query: ({params, data}) => ({

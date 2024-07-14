@@ -83,6 +83,9 @@ const Nav = () => {
           'aria-labelledby': 'basic-button',
         }}
       >
+        <Link to={'/dashboard'}>
+        <MenuItem>Dashboard</MenuItem>
+        </Link>
         <Link to={'/profile'}>
         <MenuItem>Profile</MenuItem>
         </Link>

@@ -7,23 +7,21 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 import { StyleSheet, css } from "aphrodite";
+import PropType from "prop-types"
 
-const AddBudget = () => {
+const AddBudget = (props) => {
     const [category, setCategory] = useState("");
     const [amount, setAmount] = useState("");
-    const navigate = useNavigate()
 
-    const handleSubmit = ()=>{
-        try {
-            toast.success("New Budget added");
-            navigate("/profile")
-        } catch (err) {
-            console.log(`Error adding budget ${err}`)
-            toast.error(err?.message)
-        }
+    const handleSubmit = (e)=>{
+      e.preventDefault();
+      const data = {
+        category,
+        amount
+      }
+      console.log("form data", data)
+       props.onSubmit(data)     
     }
 
   return (
@@ -84,5 +82,9 @@ const styleSheet = StyleSheet.create({
       margin: '3em 0'
     }
 })
+
+AddBudget.propTypes = {
+  onSubmit: PropType.func.isRequired
+}
 
 export default AddBudget
