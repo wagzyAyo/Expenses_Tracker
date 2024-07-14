@@ -16,7 +16,9 @@ const Profile = (props) => {
       <Link to={"/updateprofile"}>
       <CustomButton name={"Update Profile"} colorType="#143BA0"/>
       </Link >
+      <Link to={"/updatepassword"}>
       <CustomButton name={"Change Password"} colorType="border"/>
+      </Link>
       <CustomButton name={"Add Budget"} colorType="border"/>
       <CustomButton name={"Delete Account"} colorType="#E61313"/>
     </div>
