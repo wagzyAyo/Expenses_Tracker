@@ -32,7 +32,7 @@ const styleSheet = StyleSheet.create({
 CustomButton.propTypes = {
     name: PropType.string,
     colorType: PropType.oneOf(['#143BA0', '#E61313', 'border']).isRequired,
-    handleClick: PropType.func.isRequired
+    handleClick: PropType.func
 }
 
 export default CustomButton

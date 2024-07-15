@@ -170,7 +170,7 @@ Intro.propTypes = {
     amount: PropType.number.isRequired,
     date: PropType.string.isRequired,
   })),
-  currency: PropType.string.isRequired
+  currency: PropType.string
 }
 
 
