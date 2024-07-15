@@ -14,7 +14,7 @@ const AddBudgetScreen = () => {
       const response = await axios.post("http://localhost:3000/api/budget", data, {
         withCredentials: true
       })
-      console.log(response)
+      //console.log(response)
       if (response.status === 200){
         toast.success("Budget added");
         navigate("/profile")
