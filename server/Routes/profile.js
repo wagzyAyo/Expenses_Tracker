@@ -53,7 +53,7 @@ route.put('/password', authenticateToken, async (req, res)=>{
     const user = await userModel.findOne({email})
 
     if (!email || !oldPassword || !newPassword){
-        res.status(400).json({message: "email, old password and new password fields are required"});
+        return res.status(400).json({message: "email, old password and new password fields are required"});
     }
 
     try {

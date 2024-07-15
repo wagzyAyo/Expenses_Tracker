@@ -1,5 +1,4 @@
 import { useState } from "react";
-import {toast} from 'react-toastify'
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
@@ -11,12 +10,14 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import { StyleSheet, css } from "aphrodite";
+import PropType from "prop-types"
 
-const UpdatePassword = () => {
+const UpdatePassword = (props) => {
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [oldPassword, setOldPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
+    const {onSubmit} = props;
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -27,11 +28,13 @@ const UpdatePassword = () => {
 
     const handleSubmit = (e)=>{
         e.preventDefault();
-        try {
-            toast.success("Password Updated")
-        } catch (err) {
-            console.log(`Error sending request ${err}`)
-        }
+        const data = {
+            email,
+            oldPassword,
+            newPassword
+        };
+        console.log(data)
+        onSubmit(data)
     }
   return (
     <div className={css(styleSheet.container)}>
@@ -57,7 +60,7 @@ const UpdatePassword = () => {
                 <FormControl sx={{ m: 1 }} variant="outlined">
                     <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                     <OutlinedInput
-                        id="outlined-adornment-password"
+                        id="outlined-adornment"
                         type={showPassword ? 'text' : 'password'}
                         endAdornment={
                         <InputAdornment position="end">
@@ -71,7 +74,7 @@ const UpdatePassword = () => {
                             </IconButton>
                         </InputAdornment>
                         }
-                        label="Password" name='oldPassword' value={password} onChange={e => setPassword(e.target.value)}
+                        label="Password" name='oldPassword' value={oldPassword} onChange={e => setOldPassword(e.target.value)}
                     />
                     </FormControl>
                 <FormControl sx={{ m: 1 }} variant="outlined">
@@ -106,5 +109,9 @@ const styleSheet = StyleSheet.create({
       maxWidth: '600px',
       padding: '20px 10%'
     }
-  })
+  });
+
+  UpdatePassword.propTypes = {
+    onSubmit: PropType.func
+  }
 export default UpdatePassword
