@@ -9,7 +9,7 @@ const router = express.Router()
 //prefix api/data
 router.get('/', authenticateToken, (req,res)=>{
     const user = req.user;
-    res.status(200).json({user})
+    return res.status(200).json({user})
 })
 
 //add expenses
@@ -19,12 +19,12 @@ router.post('/add', authenticateToken , async (req, res)=>{
     amount = parseInt(amount)
 
     if(!category || !amount || !description || !date){
-        res.status(400).json({message: "please provide all required fields. category, amount, description, date"})
+       return res.status(400).json({message: "please provide all required fields. category, amount, description, date"})
     }
     try{
         const user = req.user
         if (!user){
-            res.status(401).json({message: "User not found"})
+           return res.status(401).json({message: "User not found"})
         }
         const newExpense = {category, amount, description, date}
         user.Expenses.push(newExpense)
@@ -33,7 +33,7 @@ router.post('/add', authenticateToken , async (req, res)=>{
         res.status(201).json({message: "Expense added successfully"})
     } catch(err){
         console.log(`Error adding expense ${err}`)
-        res.status(500).json({message: 'internal server error'})
+        return res.status(500).json({message: 'internal server error'})
     }
 })
 
@@ -68,13 +68,13 @@ router.delete('/:id/delete', authenticateToken,  async (req, res)=>{
             // Log the user after save
             console.log('User after save:', user);
             
-            res.status(200).json({ message: "Expense deleted successfully" });
+            return res.status(200).json({ message: "Expense deleted successfully" });
         } else {
-            res.status(404).json({ message: "Expense not found" });
+           return res.status(404).json({ message: "Expense not found" });
         }
     }  catch (err) {
         console.log("Error deleting expense: "+ err)
-        res.status(501).json({message: 'Internal server error'})
+        return res.status(501).json({message: 'Internal server error'})
     }
     
 })
@@ -95,7 +95,7 @@ router.put('/:id/update', authenticateToken, async (req, res)=>{
     
     try {
         if (!category || !amount || !description || !date){
-            res.status(400).json({message: "Add all required fields. category, amount , description, date"})
+            return res.status(400).json({message: "Add all required fields. category, amount , description, date"})
         }
         
         if (expenseIndex !== -1){
@@ -105,13 +105,13 @@ router.put('/:id/update', authenticateToken, async (req, res)=>{
             userExpenses[expenseIndex].date = date
             
             await user.save()
-            res.status(201).json({message: "Expense updated successfully"})
+            return res.status(201).json({message: "Expense updated successfully"})
         }else{
-            res.status(404).json({message: "Expense not found"})
+            return res.status(404).json({message: "Expense not found"})
         }
     } catch (err) {
         console.log(`Error updating user data ${err}`);
-        res.status(501).json({message: "Internal server error"})
+        return res.status(501).json({message: "Internal server error"})
     }
 })
 

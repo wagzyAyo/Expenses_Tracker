@@ -31,7 +31,9 @@ router.post('/login', async (req, res)=>{
                     firstName: user.firstName,
                     lastName: user.lastName,
                     email: user.email,
-                    Expenses: user.Expenses
+                    Currency: user.Currency,
+                    Expenses: user.Expenses,
+                    Budget: user.Budget
                 });
             }else{
                 res.status(401).json({message: "Invalid email or password"})
@@ -74,6 +76,8 @@ router.post('/signup', async (req, res)=>{
                     firstName: user.firstName,
                     lastName: user.lastName,
                     email: user.email,
+                    Budget: user.Budget,
+                    Currency: user.Currency,
                     Expenses: user.Expenses})
             } catch(err){
                 console.log(`Error creating user, duplicate email: ${err}`)

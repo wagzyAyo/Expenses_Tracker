@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Button } from "@mui/material";
 import { StyleSheet, css } from "aphrodite";
+import SummaryCard from "./SummaryCard";
 
 const Profile = (props) => {
   const [deleteAccount] = useDeleteAccountMutation();
@@ -18,6 +19,7 @@ const Profile = (props) => {
       navigate('/')
     } catch (err) {
       console.log(`Error deleting account {err}`)
+      toast.error(`${err?.message}`)
     }
   }
   return (
@@ -29,6 +31,11 @@ const Profile = (props) => {
       <ProfileInput value={props.lastName}/>
       <label htmlFor="">Email</label>
       <ProfileInput value={props.email}/>
+
+      {props.Budget?.map(budget =>{
+        return <SummaryCard key={budget._id}  category={budget.category} amount={budget.amount}/>
+      })}
+
       <Link to={"/updateprofile"}>
       <CustomButton name={"Update Profile"} colorType="#143BA0"/>
       </Link >
@@ -57,6 +64,7 @@ const styleSheet = StyleSheet.create({
 Profile.propTypes = {
   firstName : PropType.string,
   lastName: PropType.string,
-  email: PropType.string
+  email: PropType.string,
+  Budget: PropType.object
 }
 export default Profile

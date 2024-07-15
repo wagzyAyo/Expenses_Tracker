@@ -120,8 +120,8 @@ const SignupScreen = () => {
         <InputLabel id="demo-simple-select-label"></InputLabel>
         <Select
           labelId="demo-simple-select-label"
-          id="category"
-          name='category'
+          id="currency"
+          name='currency'
           value={currency}
           label="currency"
           onChange={(e)=> setCurrency(e.target.value)}

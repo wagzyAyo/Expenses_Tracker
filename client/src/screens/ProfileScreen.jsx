@@ -11,6 +11,7 @@ const ProfileScreen = () => {
   const [data, setData] = useState("");
  
   const [userData, {isLoading}] = useUserDataMutation();
+  console.log(data)
 
 
  useEffect(()=>{
@@ -40,6 +41,7 @@ const ProfileScreen = () => {
             firstName={data?.firstName} 
             lastName={data?.lastName}
             email={data?.email}
+            Budget={data?.Budget}
             />
             
             </div>
