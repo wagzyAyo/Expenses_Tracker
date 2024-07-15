@@ -28,7 +28,7 @@ route.post('/', authenticateToken, async (req, res)=>{
         const newBudget = {category, amount};
         user.Budget.push(newBudget);
         await user.save()
-        return res.status(201).json({message: "Budget added successfully"})
+        return res.status(200).json({message: "Budget added successfully"})
     } catch (err) {
         console.log(`Error adding new budget ${err}`);
         return res.status(500).json({message: "Internal server error"})
