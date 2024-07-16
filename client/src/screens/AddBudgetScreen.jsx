@@ -29,7 +29,7 @@ const AddBudgetScreen = () => {
   return (
     <div>
       <Nav />
-      <AddBudget onSubmit={handleSubmit} />
+      <AddBudget onSubmit={handleSubmit} text={"Add Budget"}/>
       <Footer />
     </div>
   )

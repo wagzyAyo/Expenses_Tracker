@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Loader from "../components/loader";
 
 const EditBudgetScreen = () => {
     const [budget, setBudget] = useState(null)
@@ -18,6 +19,7 @@ const EditBudgetScreen = () => {
         const fetch = async ()=>{
             try {
                 const response = await userData().unwrap();
+                console.log(response)
                 const data = response.user.Budget.find(budget => budget._id === id);
                 setBudget(data)
             } catch (err) {
@@ -45,9 +47,12 @@ const EditBudgetScreen = () => {
             toast.error(err?.data.message || err?.message)
         }
     }
+    if(!budget){
+        return <Loader />
+    }
   return (
     <div>
-      <AddBudget initialValues={budget} onSubmit={handleSubmit}/>
+      <AddBudget initialValues={budget} onSubmit={handleSubmit} text={"Update budget"}/>
     </div>
   )
 }

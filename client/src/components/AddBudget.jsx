@@ -63,7 +63,7 @@ const AddBudget = (props) => {
     type='submit'
     className={css(styleSheet.btn)}
     >
-      Add budget
+      {props.text}
     </Button>
     </FormControl>
     </Box>
@@ -85,7 +85,8 @@ const styleSheet = StyleSheet.create({
 
 AddBudget.propTypes = {
   onSubmit: PropType.func.isRequired,
-  initialValues: PropType.string
+  initialValues: PropType.string,
+  text: PropType.string
 }
 
 export default AddBudget
