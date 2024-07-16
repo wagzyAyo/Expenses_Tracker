@@ -8,19 +8,17 @@ import EditIcon from '@mui/icons-material/Edit';
 import { Link } from "react-router-dom";
 import { useDeleteBudgetMutation } from "../slice/userApiSlice";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 
 
 const BudgetCard = (props) => {
     const {category, amount, id} = props
     const [deleteBudget] = useDeleteBudgetMutation();
-    const navigate = useNavigate()
 
     const handleDeleteBudget = async ()=>{
         try {
             await deleteBudget(id).unwrap();
+            window.location.reload()
             toast.success("Budget deleted");
-            navigate("/profile");
         } catch (err) {
             toast.error(`Error deleting budget ${err}`)
         }

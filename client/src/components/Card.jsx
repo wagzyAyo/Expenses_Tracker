@@ -3,7 +3,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import PropType from 'prop-types';
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import CategoryIcon from "./CategoryIcon";
 import { useDeleteExpenseMutation } from "../slice/userApiSlice";
 import { toast } from "react-toastify";
@@ -12,15 +12,13 @@ import { toast } from "react-toastify";
 const Card = (props) => {
     const [deleteExpense] = useDeleteExpenseMutation()
 
-    const navigate = useNavigate();
-
     const handleDelete = async (id)=>{
         
         id = props.id
         try {
             await deleteExpense(id).unwrap();
             toast.success('Expense deleted')
-            navigate('/login')
+            window.location.reload()
         } catch (err) {
             toast.error(err?.data?.message)
         }
