@@ -54,6 +54,12 @@ export const userApiSlice = apiSlice.injectEndpoints({
                 url: `${USER_URL}/updateprofile/delete`,
                 method: "DELETE",
             })
+        }),
+        deleteBudget: builder.mutation({
+            query: (params)=> ({
+                url: `${USER_URL}/budget/${params}`,
+                method: "DELETE"
+            })
         })
     }),
 });
@@ -66,5 +72,6 @@ export const {
     useAddExpenseMutation,
     useDeleteExpenseMutation,
     useUpdateExpenseMutation,
-    useDeleteAccountMutation
+    useDeleteAccountMutation,
+    useDeleteBudgetMutation
 } = userApiSlice

@@ -19,7 +19,7 @@ const EditBudgetScreen = () => {
         const fetch = async ()=>{
             try {
                 const response = await userData().unwrap();
-                console.log(response)
+                //console.log(response)
                 const data = response.user.Budget.find(budget => budget._id === id);
                 setBudget(data)
             } catch (err) {
@@ -47,6 +47,8 @@ const EditBudgetScreen = () => {
             toast.error(err?.data.message || err?.message)
         }
     }
+
+
     if(!budget){
         return <Loader />
     }

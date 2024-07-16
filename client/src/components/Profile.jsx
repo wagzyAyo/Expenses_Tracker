@@ -34,13 +34,13 @@ const Profile = (props) => {
 
       <h1 className="text-2xl font-bold text-center my-3">Default Budget</h1>
 
-      {props.Budget ? (
+      {props.Budget > 1 ? (
         <div className={css(styleSheet.budgetcard)}>
         {props.Budget?.map(budget =>{
           return <BudgetCard key={budget._id}  category={budget.category} amount={budget.amount} id={budget._id}/>
         })}
       </div>) 
-      : ("No  Default budget budget set ")
+      : (<div className="text-1xl font-bold text-center my-3"> <p>No budget set</p></div>)
       }
       
 

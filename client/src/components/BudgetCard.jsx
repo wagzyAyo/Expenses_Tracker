@@ -6,10 +6,25 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { Link } from "react-router-dom";
+import { useDeleteBudgetMutation } from "../slice/userApiSlice";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 
 const BudgetCard = (props) => {
     const {category, amount, id} = props
+    const [deleteBudget] = useDeleteBudgetMutation();
+    const navigate = useNavigate()
+
+    const handleDeleteBudget = async ()=>{
+        try {
+            await deleteBudget(id).unwrap();
+            toast.success("Budget deleted");
+            navigate("/profile");
+        } catch (err) {
+            toast.error(`Error deleting budget ${err}`)
+        }
+    }
   return (
     <div className={css(styleSheet.card)}>
         <div className={css(styleSheet.icons)}>
@@ -18,7 +33,8 @@ const BudgetCard = (props) => {
                             <EditIcon fontSize="inherit" />
                         </IconButton>
             </Link>
-        <IconButton aria-label="delete" size="small" className={css(styleSheet.deleteIcon)}>
+        <IconButton aria-label="delete" size="small" className={css(styleSheet.deleteIcon)} 
+        onClick={handleDeleteBudget}>
                     <DeleteIcon fontSize="inherit" />
                 </IconButton>
         </div>
