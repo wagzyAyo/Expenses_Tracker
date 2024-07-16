@@ -56,7 +56,7 @@ const ProfileScreen = () => {
 const styleSheet = StyleSheet.create({
   container: {
     margin: '10px auto',
-    maxWidth: '600px',
+    maxWidth: '100%',
     padding: '20px 15%'
   }
 })

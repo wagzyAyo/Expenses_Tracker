@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Button } from "@mui/material";
 import { StyleSheet, css } from "aphrodite";
-import SummaryCard from "./SummaryCard";
+import BudgetCard from "./BudgetCard";
 
 const Profile = (props) => {
   const [deleteAccount] = useDeleteAccountMutation();
@@ -32,9 +32,13 @@ const Profile = (props) => {
       <label htmlFor="">Email</label>
       <ProfileInput value={props.email}/>
 
-      {props.Budget?.map(budget =>{
-        return <SummaryCard key={budget._id}  category={budget.category} amount={budget.amount}/>
-      })}
+      <h1 className="text-2xl font-bold text-center my-3">Default Budget</h1>
+
+      <div className={css(styleSheet.budgetcard)}>
+        {props.Budget?.map(budget =>{
+          return <BudgetCard key={budget._id}  category={budget.category} amount={budget.amount}/>
+        })}
+      </div>
 
       <Link to={"/updateprofile"}>
       <CustomButton name={"Update Profile"} colorType="#143BA0"/>
@@ -58,6 +62,13 @@ const styleSheet = StyleSheet.create({
     border: "none",
     color: "white",
     marginTop: "10px",
+  },
+  budgetcard: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexWrap: "wrap",
+    gap: "2px 2em"
   }
 })
 
