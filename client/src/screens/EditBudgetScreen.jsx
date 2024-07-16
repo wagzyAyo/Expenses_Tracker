@@ -6,6 +6,8 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Loader from "../components/loader";
+import Nav from "../components/nav";
+import Footer from "../components/footer";
 
 const EditBudgetScreen = () => {
     const [budget, setBudget] = useState(null)
@@ -54,7 +56,14 @@ const EditBudgetScreen = () => {
     }
   return (
     <div>
-      <AddBudget initialValues={budget} onSubmit={handleSubmit} text={"Update budget"}/>
+        <Nav />
+        <AddBudget 
+        initialValues={budget} 
+        onSubmit={handleSubmit} 
+        text={"Update budget"}
+        title={"Update Budget"}
+        />
+        <Footer />
     </div>
   )
 }

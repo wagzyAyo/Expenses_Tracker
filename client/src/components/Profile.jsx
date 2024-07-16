@@ -7,14 +7,16 @@ import { toast } from "react-toastify";
 import { Button } from "@mui/material";
 import { StyleSheet, css } from "aphrodite";
 import BudgetCard from "./BudgetCard";
+import Loader from "./loader";
 
 const Profile = (props) => {
   const [deleteAccount] = useDeleteAccountMutation();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleDeleteAccount = async ()=>{
     try {
       await deleteAccount().unwrap();
+      localStorage.clear()
       toast.success("Account deleted")
       navigate('/')
     } catch (err) {
@@ -22,9 +24,14 @@ const Profile = (props) => {
       toast.error(`${err?.message}`)
     }
   }
+
+  if (!props.Budget){
+    return <Loader/>
+  }
+
   return (
     <div>
-      <h1>User Profile</h1>
+      <h1 className="text-2xl font-bold text-center my-3">User Profile</h1>
       <label htmlFor="">firstName</label>
       <ProfileInput value={props.firstName}/>
       <label htmlFor="">lastName</label>
@@ -34,7 +41,7 @@ const Profile = (props) => {
 
       <h1 className="text-2xl font-bold text-center my-3">Default Budget</h1>
 
-      {props.Budget > 1 ? (
+      {props.Budget.length > 0 ? (
         <div className={css(styleSheet.budgetcard)}>
         {props.Budget?.map(budget =>{
           return <BudgetCard key={budget._id}  category={budget.category} amount={budget.amount} id={budget._id}/>

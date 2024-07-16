@@ -26,7 +26,7 @@ const AddBudget = (props) => {
 
   return (
     <div className={css(styleSheet.formStyle)}>
-        <h1 className='text-2xl font-bold text-center'>Add New Budget</h1>
+        <h1 className='text-2xl font-bold text-center'>{props.title}</h1>
         <p className='text-slate-300 my-7 text-center'>Gets you to keep your finance in Check</p>
 
         <form onSubmit={handleSubmit}>
@@ -86,7 +86,8 @@ const styleSheet = StyleSheet.create({
 AddBudget.propTypes = {
   onSubmit: PropType.func.isRequired,
   initialValues: PropType.string,
-  text: PropType.string
+  text: PropType.string,
+  title: PropType.string
 }
 
 export default AddBudget

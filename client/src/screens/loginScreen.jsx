@@ -31,6 +31,8 @@ const LoginScreen = () => {
     useEffect(() => {
         if (userInfo && userInfo.firstName){
             navigate('/dashboard')
+        } else{
+            navigate("/login")
         }
     }, [navigate, userInfo]);
 
