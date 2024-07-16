@@ -37,7 +37,7 @@ const Profile = (props) => {
       {props.Budget ? (
         <div className={css(styleSheet.budgetcard)}>
         {props.Budget?.map(budget =>{
-          return <BudgetCard key={budget._id}  category={budget.category} amount={budget.amount}/>
+          return <BudgetCard key={budget._id}  category={budget.category} amount={budget.amount} id={budget._id}/>
         })}
       </div>) 
       : ("No  Default budget budget set ")
