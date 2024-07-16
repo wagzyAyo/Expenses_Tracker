@@ -23,6 +23,7 @@ import ProfileScreen from './screens/ProfileScreen.jsx';
 import UpdateProfileScreen from './screens/UpdateProfileScreen.jsx';
 import UpdatePasswordScreen from './screens/UpdatePasswordScreen.jsx';
 import AddBudgetScreen from './screens/AddBudgetScreen.jsx';
+import EditBudgetScreen from './screens/EditBudgetScreen.jsx';
 import PrivateRoute from './components/privateRoute.jsx';
 
 
@@ -42,6 +43,7 @@ const router = createBrowserRouter(
         <Route path='/updateprofile' element={<UpdateProfileScreen />}></Route>
         <Route path='/addbudget' element={<AddBudgetScreen />}></Route>
         <Route path='/updatepassword' element={<UpdatePasswordScreen />}></Route>
+        <Route path='/updatebudget/:id' element={<EditBudgetScreen />}></Route>
         </Route>
     </Route>
   )

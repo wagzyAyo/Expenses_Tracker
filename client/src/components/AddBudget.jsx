@@ -11,8 +11,8 @@ import { StyleSheet, css } from "aphrodite";
 import PropType from "prop-types"
 
 const AddBudget = (props) => {
-    const [category, setCategory] = useState("");
-    const [amount, setAmount] = useState("");
+    const [category, setCategory] = useState(props.initialValues.category || "");
+    const [amount, setAmount] = useState(props.initialValues.amount || "");
 
     const handleSubmit = (e)=>{
       e.preventDefault();
@@ -84,7 +84,8 @@ const styleSheet = StyleSheet.create({
 })
 
 AddBudget.propTypes = {
-  onSubmit: PropType.func.isRequired
+  onSubmit: PropType.func.isRequired,
+  initialValues: PropType.string
 }
 
 export default AddBudget
