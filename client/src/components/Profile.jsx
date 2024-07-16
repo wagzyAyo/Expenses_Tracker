@@ -34,11 +34,15 @@ const Profile = (props) => {
 
       <h1 className="text-2xl font-bold text-center my-3">Default Budget</h1>
 
-      <div className={css(styleSheet.budgetcard)}>
+      {props.Budget ? (
+        <div className={css(styleSheet.budgetcard)}>
         {props.Budget?.map(budget =>{
           return <BudgetCard key={budget._id}  category={budget.category} amount={budget.amount}/>
         })}
-      </div>
+      </div>) 
+      : ("No  Default budget budget set ")
+      }
+      
 
       <Link to={"/updateprofile"}>
       <CustomButton name={"Update Profile"} colorType="#143BA0"/>
