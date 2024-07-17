@@ -4,7 +4,7 @@ import Intro from "../components/intro";
 import Footer from "../components/footer";
 import { useUserDataMutation } from '../slice/userApiSlice';
 import Loader from '../components/loader';
-import { toTitleCase } from '../utils/utils';
+import { toTitleCase} from '../utils/utils';
 
 
 
@@ -35,7 +35,12 @@ const UserDashboard = () => {
         </>)
         :
         (<>
-        <Intro firstName={toTitleCase(data?.firstName)} exp={data?.Expenses} currency={data?.Currency}/>
+        <Intro 
+        firstName={toTitleCase(data?.firstName)} 
+        exp={data?.Expenses} 
+        currency={data?.Currency}
+        budget= {data?.Budget}
+        />
         </>)
        
       }

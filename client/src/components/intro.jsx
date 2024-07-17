@@ -133,7 +133,7 @@ const Intro = (props) => {
         filteredExp.length > 0 ? (
           <div className="mt-5">
             {Object.entries(summaryData).map(([category, total]) => (
-              <SummaryCard key={category} category={category} amount={toMoney(total)} />
+              <SummaryCard key={category} category={category} amount={toMoney(total)} budget={props.budget}/>
             ))}
           </div>
         ) : (
@@ -170,7 +170,8 @@ Intro.propTypes = {
     amount: PropType.number.isRequired,
     date: PropType.string.isRequired,
   })),
-  currency: PropType.string
+  currency: PropType.string,
+  budget: PropType.object,
 }
 
 
