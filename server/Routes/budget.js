@@ -7,7 +7,7 @@ const mongoose = require("mongoose")
 //Add budget
 //Api prefix /api/budget
 route.post('/', authenticateToken, async (req, res)=>{
-    console.log("receiving data", req.body)
+    //console.log("receiving data", req.body)
     let {category, amount} = req.body;
 
     if(!category || !amount){

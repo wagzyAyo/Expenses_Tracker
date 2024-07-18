@@ -32,7 +32,7 @@ const index = props.budget.findIndex((budget) => props.category === budget.categ
 
 
 const budgetAmount = Number(props.budget[index]?.amount || 0);
-const amount = props.amount !== undefined && props.amount !== null ? Number(props.amount) : NaN;
+const amount = Number(props.amount);
 const color = amount > budgetAmount ? "red" : "green";
 
 
