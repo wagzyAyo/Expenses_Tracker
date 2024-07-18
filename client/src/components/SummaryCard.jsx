@@ -49,7 +49,7 @@ if(!props.amount){
       </div>
       </div>
       <div className="font-bold" style={{color}}>
-        {props.amount}
+        {toMoney(props.amount)}
       </div>
     </div>
   )

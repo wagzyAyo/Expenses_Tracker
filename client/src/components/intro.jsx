@@ -133,7 +133,7 @@ const Intro = (props) => {
         filteredExp.length > 0 ? (
           <div className="mt-5">
             {Object.entries(summaryData).map(([category, total]) => (
-              <SummaryCard key={category} category={category} amount={toMoney(total)} budget={props.budget}/>
+              <SummaryCard key={category} category={category} amount={total} budget={props.budget}/>
             ))}
           </div>
         ) : (
