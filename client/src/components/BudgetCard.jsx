@@ -74,7 +74,7 @@ const styleSheet = StyleSheet.create({
 
 BudgetCard.propTypes = {
     category: PropType.string,
-    amount: PropType.string,
+    amount: PropType.number,
     id: PropType.string
 }
 export default BudgetCard
