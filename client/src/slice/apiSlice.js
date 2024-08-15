@@ -1,7 +1,7 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: 'http://localhost:3000/',
+    baseUrl: 'https://expense-tracker-server-p92x.onrender.com/',
     credentials: 'include'
 })
 

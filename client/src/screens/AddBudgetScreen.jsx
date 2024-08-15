@@ -11,7 +11,7 @@ const AddBudgetScreen = () => {
   const handleSubmit = async (data)=>{
     try {
       console.log("Submitting data to API:", data);
-      const response = await axios.post("http://localhost:3000/api/budget", data, {
+      const response = await axios.post("https://expense-tracker-server-p92x.onrender.com/api/budget", data, {
         withCredentials: true
       })
       //console.log(response)

@@ -10,7 +10,7 @@ const UpdatePasswordScreen = () => {
 
   const updatePassword = async (data)=>{
     try {
-      const response = await axios.put("http://localhost:3000/api/updateprofile/password", data, {
+      const response = await axios.put("https://expense-tracker-server-p92x.onrender.com/api/updateprofile/password", data, {
         withCredentials: true
       })
       if (/^2/.test(response.status)){

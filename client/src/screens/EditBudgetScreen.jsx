@@ -33,7 +33,7 @@ const EditBudgetScreen = () => {
 
     const handleSubmit = async (formData)=>{
         try {
-            const response = await axios.put(`http://localhost:3000/api/budget/${id}/update`, 
+            const response = await axios.put(`https://expense-tracker-server-p92x.onrender.com/api/budget/${id}/update`, 
                 formData,
                 {
                     withCredentials: true

@@ -29,7 +29,7 @@ const UpdateProfileScreen = () => {
  
  const handleSubmit = async (profileData)=>{
     try {
-        const response = await axios.put("http://localhost:3000/api/updateprofile",profileData, {
+        const response = await axios.put("https://expense-tracker-server-p92x.onrender.com/api/updateprofile",profileData, {
           withCredentials: true
         })
         if (/^2/.test(response.status)){
