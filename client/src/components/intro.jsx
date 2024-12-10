@@ -79,8 +79,8 @@ const Intro = (props) => {
     >
       <h1 className="text-4xl font-bold text-gray-900">{greeting} {props.firstName}</h1>
       <p className="text-slate-300 my-7">Monitor your spending habit and make right financial decisions.</p>
-      <div className="mt-10 flex justify-between flex-wrap">
-        <div className="px-3">
+      <div className="mt-10 flex justify-between flex-wrap ">
+        <div className="p-3">
           <Button
           variant={activeButton === "today" ? "contained" : "outlined"}
           sx={activeButton === 'today' ? customButtonStyle.contained : customButtonStyle.outlined}
@@ -94,23 +94,23 @@ const Intro = (props) => {
           sx={activeButton === 'month' ? customButtonStyle.contained : customButtonStyle.outlined}
           onClick={()=> handleClick("month")}>This Month</Button>
 
-
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DemoContainer components={['DatePicker']} >
-              <DatePicker
-                name='date'
-                value={date}
-                id='date'
-                onChange={(newValue) => {
-                  const selectedDate = dayjs(newValue)
-                  handleClick('custom', selectedDate)
-                }
-                }
-                format='DD-MM-YYYY'
-              />
-            </DemoContainer>
-            </LocalizationProvider>
-
+          <div className="mt-[20px] mb-[20px]">
+            <LocalizationProvider dateAdapter={AdapterDayjs} >
+              <DemoContainer components={['DatePicker']} >
+                <DatePicker
+                  name='date'
+                  value={date}
+                  id='date'
+                  onChange={(newValue) => {
+                    const selectedDate = dayjs(newValue)
+                    handleClick('custom', selectedDate)
+                  }
+                  }
+                  format='DD-MM-YYYY'
+                />
+              </DemoContainer>
+              </LocalizationProvider>
+            </div>
             
         </div>
         <div>
