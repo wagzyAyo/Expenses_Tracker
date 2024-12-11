@@ -18,7 +18,8 @@ const UserDashboard = () => {
 
 
  useEffect(()=>{
-  const fecthData = async ()=>{
+  const initialize = async ()=>{
+    await checkAuth(navigate, 'login')
     try {
       const response = await userData().unwrap()
       setData(response.user)
@@ -26,8 +27,8 @@ const UserDashboard = () => {
       console.log(err)
     }
   }
- checkAuth(navigate, 'login')
- fecthData();
+ 
+ initialize();
  },[userData, navigate])
   return (
     <div className="min-h-screen flex flex-col">
