@@ -12,13 +12,14 @@ import {StyleSheet, css} from 'aphrodite';
 import logo from '../assets/Logo.png';
 import Button from '@mui/material/Button';
 import {Link, useNavigate} from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, /*useSelector*/ } from 'react-redux';
 import { setCredentials } from '../slice/auth';
 import {toast} from 'react-toastify';
 import { useSignupMutation } from '../slice/userApiSlice';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { currencySymbols } from '../utils/currencySymbols';
+import { checkAuth } from '../utils/authUtils';
 
 
 
@@ -38,14 +39,12 @@ const SignupScreen = () => {
 
 
     const [signup, /*{isLoading}*/] = useSignupMutation();
-    const { userInfo } = useSelector((state) => state.auth);
+    //const { userInfo } = useSelector((state) => state.auth);
 
 
     useEffect(() => {
-        if (userInfo && userInfo.firstName){
-            navigate('/dashboard')
-        }
-    }, [navigate, userInfo]);
+        checkAuth(navigate, 'dashboard')
+    }, [navigate]);
 
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);

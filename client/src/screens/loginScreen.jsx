@@ -12,10 +12,11 @@ import Button from '@mui/material/Button';
 import {StyleSheet, css} from 'aphrodite'
 import logo from '../assets/Logo.png'
 import {Link, useNavigate} from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, /*useSelector*/ } from 'react-redux';
 import { useLoginMutation } from '../slice/userApiSlice';
 import { setCredentials } from '../slice/auth';
-import {toast} from 'react-toastify'
+import {toast} from 'react-toastify';
+import { checkAuth } from '../utils/authUtils';
 
 const LoginScreen = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -26,15 +27,11 @@ const LoginScreen = () => {
     const dispatch = useDispatch();
 
     const [login, /*{ isLoading }*/] = useLoginMutation();
-    const { userInfo } = useSelector((state) => state.auth);
+    //const { userInfo } = useSelector((state) => state.auth);
 
     useEffect(() => {
-        if (userInfo && userInfo.firstName){
-            navigate('/dashboard')
-        } else{
-            navigate("/login")
-        }
-    }, [navigate, userInfo]);
+        checkAuth(navigate, 'dashboard')
+    }, [navigate]);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 

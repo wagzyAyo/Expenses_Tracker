@@ -6,7 +6,7 @@ import Footer from "../components/footer";
 import { useUserDataMutation } from '../slice/userApiSlice';
 import Loader from '../components/loader';
 import { toTitleCase} from '../utils/utils';
-
+import { checkAuth } from '../utils/authUtils';
 
 
 
@@ -18,14 +18,6 @@ const UserDashboard = () => {
 
 
  useEffect(()=>{
-  const checkAuth = async ()=>{
-    const response = await fetch('https://expense-tracker-server-p92x.onrender.com/api/checkauth', {
-      credentials: true
-    });
-    if(response.status !== 200){
-      navigate('/login')
-    }
-  }
   const fecthData = async ()=>{
     try {
       const response = await userData().unwrap()
@@ -34,7 +26,7 @@ const UserDashboard = () => {
       console.log(err)
     }
   }
- checkAuth()
+ checkAuth(navigate, 'login')
  fecthData();
  },[userData, navigate])
   return (
