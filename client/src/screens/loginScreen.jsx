@@ -30,7 +30,7 @@ const LoginScreen = () => {
     //const { userInfo } = useSelector((state) => state.auth);
 
     useEffect(() => {
-        checkAuth(navigate, 'dashboard')
+        checkAuth(navigate, 'login')
     }, [navigate]);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);

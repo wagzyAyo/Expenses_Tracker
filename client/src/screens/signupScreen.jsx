@@ -43,7 +43,7 @@ const SignupScreen = () => {
 
 
     useEffect(() => {
-        checkAuth(navigate, 'dashboard')
+        checkAuth(navigate, 'signup')
     }, [navigate]);
 
 
