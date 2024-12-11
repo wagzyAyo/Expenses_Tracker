@@ -1,4 +1,5 @@
-import {useEffect, useState} from 'react'
+import {useEffect, useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import Nav from "../components/nav";
 import Intro from "../components/intro";
 import Footer from "../components/footer";
@@ -13,10 +14,18 @@ const UserDashboard = () => {
   const [data, setData] = useState("");
  
   const [userData, {isLoading}] = useUserDataMutation();
+  const navigate = useNavigate()
 
 
  useEffect(()=>{
-  
+  const checkAuth = async ()=>{
+    const response = await fetch('https://expense-tracker-server-p92x.onrender.com/api/checkauth', {
+      credentials: true
+    });
+    if(response.status !== 200){
+      navigate('/login')
+    }
+  }
   const fecthData = async ()=>{
     try {
       const response = await userData().unwrap()
@@ -25,9 +34,9 @@ const UserDashboard = () => {
       console.log(err)
     }
   }
- 
+ checkAuth()
  fecthData();
- },[userData])
+ },[userData, navigate])
   return (
     <div className="min-h-screen flex flex-col">
       <main className="flex-grow">
