@@ -16,6 +16,7 @@ const UserDashboard = () => {
 
 
  useEffect(()=>{
+  
   const fecthData = async ()=>{
     try {
       const response = await userData().unwrap()
@@ -24,6 +25,7 @@ const UserDashboard = () => {
       console.log(err)
     }
   }
+ 
  fecthData();
  },[userData])
   return (
