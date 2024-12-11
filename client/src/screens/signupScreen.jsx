@@ -43,7 +43,10 @@ const SignupScreen = () => {
 
 
     useEffect(() => {
-        checkAuth(navigate, 'signup')
+        const intialize = async ()=>{
+            await checkAuth(navigate, 'signup')
+        }
+        intialize();
     }, [navigate]);
 
 
