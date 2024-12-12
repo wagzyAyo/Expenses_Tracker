@@ -68,7 +68,7 @@ Expenses Tracker is a web application that allows users to monitor their spendin
 
 
 - **Vercel**: Platform for frontend deployment.
-- **Heroku**: Platform for backend deployment.
+- **Render**: Platform for backend deployment.
 
 
 ## Installation
@@ -124,6 +124,10 @@ PORT=port to listen to request
 MONGO_URI=your_mongodb_atlas_connection_string
 JWT_SECRET=your_jwt_secret_key
 ```
+
+## Or Use our deployed version
+
+[site](expenses-tracker-nine-zeta.vercel.app)
 
 
 ## Usage
