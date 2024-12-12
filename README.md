@@ -125,9 +125,6 @@ MONGO_URI=your_mongodb_atlas_connection_string
 JWT_SECRET=your_jwt_secret_key
 ```
 
-## Or Use our deployed version
-
-[site](expenses-tracker-nine-zeta.vercel.app)
 
 
 ## Usage
@@ -158,6 +155,10 @@ npm run dev
 
 
 Open your browser and go to `http://localhost:5173/`.
+
+## Or skip the previous steps & use our deployed version
+
+[site](https://expenses-tracker-nine-zeta.vercel.app)
 
 
 ## API Endpoints
