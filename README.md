@@ -14,6 +14,7 @@ Expenses Tracker is a web application that allows users to monitor their spendin
 - [Technologies Used](#technologies-used)
 - [Installation](#installation)
 - [Usage](#usage)
+-[Deployed](#Deployed)
 - [API Endpoints](#api-endpoints)
 - [Contributing](#contributing)
 - [License](#license)
@@ -156,7 +157,19 @@ npm run dev
 
 Open your browser and go to `http://localhost:5173/`.
 
-## Or skip the previous steps & use our deployed version
+## deployed
+# Or skip the previous steps & use our deployed version
+
+<b>Start the backend srver<b>
+
+[backend](https://expense-tracker-server-p92x.onrender.com/)
+
+wait for this response
+``` bash
+   Hello World
+```
+
+# Visit the client app
 
 [site](https://expenses-tracker-nine-zeta.vercel.app)
 
