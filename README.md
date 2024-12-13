@@ -14,7 +14,7 @@ Expenses Tracker is a web application that allows users to monitor their spendin
 - [Technologies Used](#technologies-used)
 - [Installation](#installation)
 - [Usage](#usage)
--[Deployed](#Deployed)
+- [Deployed](#Deployed)
 - [API Endpoints](#api-endpoints)
 - [Contributing](#contributing)
 - [License](#license)
@@ -160,7 +160,7 @@ Open your browser and go to `http://localhost:5173/`.
 ## deployed
 # Or skip the previous steps & use our deployed version
 
-<b>Start the backend srver<b>
+<b>Start the backend server
 
 [backend](https://expense-tracker-server-p92x.onrender.com/)
 
