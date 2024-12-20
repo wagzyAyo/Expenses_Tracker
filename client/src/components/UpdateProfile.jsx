@@ -7,6 +7,7 @@ import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { currencySymbols } from "../utils/currencySymbols";
+import Loader from "./loader";
 
 
 
@@ -35,7 +36,14 @@ const UpdateProfile = (props) => {
           currency,
           password
         };
+        console.log(formData)
         props.onSubmit(formData)
+    }
+
+    if(!firstName || !lastName || !email){
+      return (
+        <Loader />
+      )
     }
   return (
     <div className={css(styleSheet.formStyle)}>
