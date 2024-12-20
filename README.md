@@ -1,10 +1,10 @@
-# Expenses Tracker
----
-MONEX
----
+
 ![alt text](icon.svg)
 ---
-Expenses Tracker is a web application that allows users to monitor their spending habits and make informed financial decisions. Users can add, view, and filter their expenses based on different time periods such as today, this week, or this month.
+Monex is a web application that allows users to monitor 
+their spending habits and make informed financial decisions. 
+Users can add, view, and filter their expenses based on 
+different time periods such as today, this week, or this month.
 
 
 ## Table of Contents
