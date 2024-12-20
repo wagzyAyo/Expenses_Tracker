@@ -32,7 +32,7 @@ const UpdateProfile = (props) => {
           firstName,
           lastName,
           email,
-          Currency: currency,
+          currency,
           password
         };
         props.onSubmit(formData)
