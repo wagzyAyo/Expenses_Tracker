@@ -61,7 +61,7 @@ const Profile = (props) => {
       <CustomButton name={"Add Budget"} colorType="border"/>
       </Link>
       <Button className={css(styleSheet.btn)} onClick={handleDeleteAccount}>
-        DeleteAccount
+        Delete Account
         </Button>
     </div>
   )
