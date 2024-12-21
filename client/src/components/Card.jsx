@@ -60,7 +60,7 @@ const styleSheet = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: '10px 2%',
-        width: '400px',
+        maxWidth: '400px',
         height: '80px',
         border: '1px solid black',
         margin: '25px auto'

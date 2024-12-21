@@ -57,7 +57,7 @@ const styleSheet = StyleSheet.create({
         height: 'auto',
         margin: 'auto',
         '@media (max-width: 700px)': {
-          width: '300px'
+          width: '90%'
         }
     }
 })
