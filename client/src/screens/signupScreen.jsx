@@ -199,7 +199,7 @@ const SignupScreen = () => {
 const styles = StyleSheet.create(
     {
         flexDisplay: {
-        width: '600px',
+        maxWidth: '600px',
         height: 'auto',
         padding: '2em',
         border: '2px solid grey',
@@ -208,6 +208,7 @@ const styles = StyleSheet.create(
         alignItems: 'center',
         justifyContent: "center",
         margin: '10% auto',
+        overflowX: 'hidden',
         '@media (max-width: 700px)': {
             border: 'none',
         }

@@ -55,7 +55,10 @@ const styleSheet = StyleSheet.create({
     img: {
         maxWidth: '600px',
         height: 'auto',
-        margin: 'auto'
+        margin: 'auto',
+        '@media (max-width: 700px)': {
+          width: '300px'
+        }
     }
 })
 
