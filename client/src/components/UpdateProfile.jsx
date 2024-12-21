@@ -16,7 +16,7 @@ const UpdateProfile = (props) => {
     const [firstName, setFirstname] = useState(props.initialValues?.firstName || "" );
     const [lastName, setLastname] = useState(props.initialValues?.lastName || "");
     const [email, setEmail] = useState(props.initialValues.email || "");
-    const [currency, setCurrency] = useState(props.initialValues.currency || "")
+    const [currency, setCurrency] = useState(props.initialValues.Currency || "")
     const [password, setPassword] = useState("")
 
   useEffect(()=>{
@@ -128,7 +128,7 @@ UpdateProfile.propTypes = {
     lastName: PropType.string,
     email: PropType.string,
     password: PropType.string,
-    currency: PropType.string
+    Currency: PropType.string
   }).isRequired,
   onSubmit: PropType.func.isRequired
 }
