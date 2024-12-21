@@ -207,7 +207,10 @@ const styles = StyleSheet.create(
         display: 'grid',
         alignItems: 'center',
         justifyContent: "center",
-        margin: '10% auto'
+        margin: '10% auto',
+        '@media (max-width: 700px)': {
+            border: 'none',
+        }
     },
     logo: {
         width: '100px',

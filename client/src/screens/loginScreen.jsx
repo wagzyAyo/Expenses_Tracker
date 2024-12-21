@@ -30,6 +30,7 @@ const LoginScreen = () => {
     //const { userInfo } = useSelector((state) => state.auth);
 
     useEffect(() => {
+        
         const intialize = async ()=>{
             await checkAuth(navigate)
         }
@@ -116,12 +117,17 @@ const styles = StyleSheet.create(
         display: 'grid',
         alignItems: 'center',
         justifyContent: "center",
-        margin: '10% auto'
+        margin: '10% auto',
+        '@media (max-width: 700px)':{
+            border: 'none'
+        }
     },
     logo: {
         width: '100px',
         margin: '20px auto'
     }
+    
 }
+
 )
 export default LoginScreen
