@@ -17,11 +17,13 @@ import { useLoginMutation } from '../slice/userApiSlice';
 import { setCredentials } from '../slice/auth';
 import {toast} from 'react-toastify';
 import { checkAuth } from '../utils/authUtils';
+import Loader from '../components/loader';
 
 const LoginScreen = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [isloading, setIsloading] = useState(true)
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -33,6 +35,7 @@ const LoginScreen = () => {
         
         const intialize = async ()=>{
             await checkAuth(navigate)
+            setIsloading(false)
         }
         intialize();
         
@@ -54,7 +57,11 @@ const LoginScreen = () => {
         toast.error(err.data?.message || 'Incorrect email or password')
     }
   }
- 
+ if(isloading){
+    return (
+        <Loader />
+    )
+ }
   return (
     <div className={css(styles.flexDisplay)}>
         <form action="" onSubmit={handleSubmit}>

@@ -20,6 +20,7 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { currencySymbols } from '../utils/currencySymbols';
 import { checkAuth } from '../utils/authUtils';
+import Loader from '../components/loader';
 
 
 
@@ -31,7 +32,8 @@ const SignupScreen = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [currency, setCurrency] = useState("")
+    const [currency, setCurrency] = useState("");
+    const [isloading, setIsloading] = useState(true);
 
 
     const navigate = useNavigate();
@@ -44,7 +46,8 @@ const SignupScreen = () => {
 
     useEffect(() => {
         const intialize = async ()=>{
-            await checkAuth(navigate, 'signup')
+            await checkAuth(navigate, 'signup');
+            setIsloading(false)
         }
         intialize();
     }, [navigate]);
@@ -75,7 +78,11 @@ const SignupScreen = () => {
     }
   }
 
-
+if(isloading){
+    return (
+        <Loader />
+    )
+}
   return (
     <div className={css(styles.flexDisplay)}>
         <form action="" onSubmit={handleSubmit}>
