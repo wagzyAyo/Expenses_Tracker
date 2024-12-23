@@ -84,7 +84,7 @@ if(isloading){
     return (
         <div>
             <Loader />
-            {message}
+            <span className='text-center text-2xl mt-50%'>{message}</span>
         </div>
         
     )
