@@ -49,7 +49,8 @@ const SignupScreen = () => {
         const intialize = async ()=>{
             await checkAuth(navigate, 'signup');
             setMessage("Check complete")
-            setIsloading(false)
+            const timeOut = setTimeout(setIsloading, 500, false);
+            clearTimeout(timeOut);
         }
         intialize();
     }, [navigate]);
@@ -84,7 +85,7 @@ if(isloading){
     return (
         <div>
             <Loader />
-            <span className='text-center text-2xl mt-50%'>{message}</span>
+            <div className='text-center text-2xl m-[auto]'>{message}</div>
         </div>
         
     )
