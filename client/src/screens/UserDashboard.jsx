@@ -12,8 +12,9 @@ import { checkAuth } from '../utils/authUtils';
 
 const UserDashboard = () => {
   const [data, setData] = useState("");
+  const [isLoading, setIsLoading] = useState(true)
  
-  const [userData, {isLoading}] = useUserDataMutation();
+  const [userData] = useUserDataMutation();
   const navigate = useNavigate()
 
 
@@ -22,7 +23,8 @@ const UserDashboard = () => {
     await checkAuth(navigate, 'login')
     try {
       const response = await userData().unwrap()
-      setData(response.user)
+      setData(response.user);
+      setIsLoading(false);
     } catch (err) {
       console.log(err)
     }
