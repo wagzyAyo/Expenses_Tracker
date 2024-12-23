@@ -23,7 +23,8 @@ const LoginScreen = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [isloading, setIsloading] = useState(true)
+    const [isloading, setIsloading] = useState(true);
+    const [message, setMessage] = useState("Checking Authentication")
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -34,8 +35,9 @@ const LoginScreen = () => {
     useEffect(() => {
         
         const intialize = async ()=>{
-            await checkAuth(navigate)
-            setIsloading(false)
+            await checkAuth(navigate);
+            setMessage("Check complete");
+            setIsloading(false);
         }
         intialize();
         
@@ -59,7 +61,10 @@ const LoginScreen = () => {
   }
  if(isloading){
     return (
-        <Loader />
+        <div>
+           <Loader />
+           {message}
+        </div>
     )
  }
   return (

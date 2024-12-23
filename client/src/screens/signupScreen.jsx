@@ -34,6 +34,7 @@ const SignupScreen = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [currency, setCurrency] = useState("");
     const [isloading, setIsloading] = useState(true);
+    const [message, setMessage] = useState("Checking Authentication")
 
 
     const navigate = useNavigate();
@@ -47,6 +48,7 @@ const SignupScreen = () => {
     useEffect(() => {
         const intialize = async ()=>{
             await checkAuth(navigate, 'signup');
+            setMessage("Check complete")
             setIsloading(false)
         }
         intialize();
@@ -80,7 +82,11 @@ const SignupScreen = () => {
 
 if(isloading){
     return (
-        <Loader />
+        <div>
+            <Loader />
+            {message}
+        </div>
+        
     )
 }
   return (
