@@ -24,7 +24,7 @@ const LoginScreen = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isloading, setIsloading] = useState(true);
-    const [message, setMessage] = useState("Checking Authentication")
+    const [message, setMessage] = useState("connecting to backend server this might take a while")
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
