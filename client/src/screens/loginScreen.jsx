@@ -35,9 +35,9 @@ const LoginScreen = () => {
     useEffect(() => {
         
         const intialize = async ()=>{
+            setMessage("Checking Authentication");
             await checkAuth(navigate);
-            setMessage("Check complete");
-            const timeOut = setTimeout(setIsloading, 500, false);
+            const timeOut = setTimeout(setIsloading, 30, false);
             clearTimeout(timeOut);
         }
         intialize();
