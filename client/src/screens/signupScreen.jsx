@@ -34,7 +34,7 @@ const SignupScreen = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [currency, setCurrency] = useState("");
     const [isloading, setIsloading] = useState(true);
-    const [message, setMessage] = useState("Checking Authentication")
+    const [message, setMessage] = useState("connecting to backend server this might take a while")
 
 
     const navigate = useNavigate();
@@ -49,8 +49,8 @@ const SignupScreen = () => {
         const intialize = async ()=>{
             await checkAuth(navigate, 'signup');
             setMessage("Check complete")
-            const timeOut = setTimeout(setIsloading, 500, false);
-            clearTimeout(timeOut);
+            const timeOut = setTimeout(()=>setIsloading(false), 300);
+            return ()=> clearTimeout(timeOut);
         }
         intialize();
     }, [navigate]);
