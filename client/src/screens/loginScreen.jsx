@@ -37,8 +37,8 @@ const LoginScreen = () => {
         const intialize = async ()=>{
             setMessage("Checking Authentication");
             await checkAuth(navigate);
-            const timeOut = setTimeout(setIsloading, 30, false);
-            clearTimeout(timeOut);
+            const timeOut = setTimeout(()=> setIsloading(false), 300);
+            return ()=> clearTimeout(timeOut);
         }
         intialize();
         
