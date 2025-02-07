@@ -3,7 +3,8 @@ const router = express.Router()
 const userModel = require('../models/user')
 const bcrypt = require('bcryptjs')
 const token = require('../utils/genToken');
-const authToken = require('../utils/authToken')
+const authToken = require('../utils/authToken');
+const { path } = require('../models/expense');
 
 router.get('/', (req, res)=>{
     res.send({message: 'you hit the api route'}).json()
@@ -91,9 +92,10 @@ router.post('/signup', async (req, res)=>{
 //Logout route
 //prefix- /api
 router.post('/logout', (req, res)=>{
-    res.cookie('jwt', '', {
-        httpOnly: true,
-        expires: new Date(0)
+    res.clearCookie('jwt',{
+        path: "/",
+        secure: true,
+        sameSite: "Strict"
     });
 
     res.status(200).json({message: 'User logged out'})
