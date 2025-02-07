@@ -49,7 +49,8 @@ const SignupScreen = () => {
         const intialize = async ()=>{
             await checkAuth(navigate, 'signup');
             setMessage("Check complete")
-            setTimeout(()=>setIsloading(false), 300);
+            const timeOut = setTimeout(()=>setIsloading(false), 300);
+            return ()=> clearTimeout(timeOut)
         }
         intialize();
     }, [navigate]);
