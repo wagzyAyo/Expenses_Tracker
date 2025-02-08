@@ -4,7 +4,6 @@ const userModel = require('../models/user')
 const bcrypt = require('bcryptjs')
 const token = require('../utils/genToken');
 const authToken = require('../utils/authToken');
-const { path } = require('../models/expense');
 
 router.get('/', (req, res)=>{
     res.send({message: 'you hit the api route'}).json()
@@ -92,6 +91,10 @@ router.post('/signup', async (req, res)=>{
 //Logout route
 //prefix- /api
 router.post('/logout', (req, res)=>{
+    res.cookie('jwt', '', {
+        httpOnly: true,
+        expires: new Date(0)
+    });
     res.clearCookie('jwt',{
         path: "/",
         httpOnly: true,
@@ -108,7 +111,7 @@ router.post('/checkauth', authToken, async (req, res)=>{
          return res.status(200).json({message: "Authorized access, user signed in"})
     } catch (err) {
         console.log("Error checking auth", err)
-        return res.status(500).json({message: "internal server error"})
+        return res.status(401).json({message: "Unaythorized access"})
     }
 
 })

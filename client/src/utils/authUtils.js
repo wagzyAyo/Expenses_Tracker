@@ -5,9 +5,9 @@ export const checkAuth = async (navigate, route = 'login')=>{
             credentials: 'include'
           });
           if(response.status === 200){
-            console.log('User is authenticated')
+            console.log(`User is authenticated; status: ${response.status}`)
             navigate(`/dashboard`)
-          }else if (response.status === 401){
+          }else {
               console.log('User is not authenticated', route)
               navigate(`/${route}`)
           }
