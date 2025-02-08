@@ -94,7 +94,8 @@ router.post('/signup', async (req, res)=>{
 router.post('/logout', (req, res)=>{
     res.clearCookie('jwt',{
         path: "/",
-        secure: true,
+        httpOnly: true,
+        secure: process.env.NODE_ENV !== 'development',
         sameSite: "Strict"
     });
 
