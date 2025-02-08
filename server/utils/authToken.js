@@ -12,6 +12,9 @@ const authenticateToken = async (req, res, next)=> {
         req.user = await User.findById(decoded.userId).select('-password');
         next()
     } catch(err){
+        if(err.name === 'TokenExpiredError'){
+            return res.status(401).json({ message: "Token expired. Please log in again." });
+        }
         res.status(400).json({message: "invalid token"})
     }
 }

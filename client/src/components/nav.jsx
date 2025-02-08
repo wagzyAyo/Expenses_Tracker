@@ -55,7 +55,7 @@ const Nav = () => {
         method: "POST",
         credentials: "include"
       })
-      if(response.ok){
+      if(response.status === 200){
         navigate('/')
       }else{
         window.location.reload()
