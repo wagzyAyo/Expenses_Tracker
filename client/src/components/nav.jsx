@@ -49,9 +49,17 @@ const Nav = () => {
 
   const handleLogout = async ()=>{
     try {
-      await logoutApi().unwrap()
+      await logoutApi().unwrap();
       dispatch(clearCredentials());
-      navigate('/')
+      const response = await fetch("https://expense-tracker-server-p92x.onrender.com/api/logout", {
+        method: 'POST'
+      })
+      if(response.status == 200){
+        navigate('/')
+      }else{
+        window.location.reload()
+      }
+      
     } catch (err) {
       console.log(err)
     }
