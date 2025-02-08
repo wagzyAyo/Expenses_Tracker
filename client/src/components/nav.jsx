@@ -52,9 +52,10 @@ const Nav = () => {
       await logoutApi().unwrap();
       dispatch(clearCredentials());
       const response = await fetch("https://expense-tracker-server-p92x.onrender.com/api/logout", {
-        method: 'POST'
+        method: "POST",
+        credentials: "include"
       })
-      if(response.status == 200){
+      if(response.ok){
         navigate('/')
       }else{
         window.location.reload()
