@@ -16,7 +16,7 @@ import { useDispatch, /*useSelector*/ } from 'react-redux';
 import { useLoginMutation } from '../slice/userApiSlice';
 import { setCredentials } from '../slice/auth';
 import {toast} from 'react-toastify';
-import { checkAuth } from '../utils/authUtils';
+// import { checkAuth } from '../utils/authUtils';
 import Loader from '../components/loader';
 
 const LoginScreen = () => {
@@ -35,8 +35,7 @@ const LoginScreen = () => {
     useEffect(() => {
         
         const intialize = async ()=>{
-            await checkAuth(navigate);
-            setMessage("Checking Authentication");
+            setMessage("Authenticate");
             const timeOut = setTimeout(()=> setIsloading(false), 300);
             return ()=> clearTimeout(timeOut)
         }

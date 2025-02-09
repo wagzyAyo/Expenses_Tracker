@@ -51,16 +51,8 @@ const Nav = () => {
     try {
       await logoutApi().unwrap();
       dispatch(clearCredentials());
-      const response = await fetch("https://expense-tracker-server-p92x.onrender.com/api/logout", {
-        method: "POST",
-        credentials: "include"
-      })
-      if(response.status === 200){
-        document.cookie = "jwt=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-        navigate('/')
-      }else{
-        window.location.reload()
-      }
+      document.cookie = "jwt=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+      navigate('/')
       
     } catch (err) {
       console.log(err)
