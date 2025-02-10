@@ -70,12 +70,13 @@ const SignupScreen = () => {
     if (password !== confirmPassword){
         toast.error('Password and confirm password do not match')
     } else{
-        setSignupText(()=> signupText.padEnd(11, '.'))
+        setSignupText(()=> "Signing up".padEnd(13, '.'))
         try {
             const res = await signup({firstName, lastName, email, currency, password}).unwrap()
         dispatch(setCredentials(res))
         navigate('/dashboard')
         } catch (err) {
+            setSignupText('Sign Up')
             toast.error("User with the email already exist")
         }
     }

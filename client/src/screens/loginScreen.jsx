@@ -52,12 +52,13 @@ const LoginScreen = () => {
 
   const handleSubmit = async (e)=>{
     e.preventDefault();
-    setLoginText(()=>loginText.padEnd(8, '.'))
+    setLoginText(()=>"login in".padEnd(11, '.'))
     try {
         const res = await login({email, password}).unwrap()
         dispatch(setCredentials(res))
         navigate('/dashboard')
     } catch (err) {
+        setLoginText("Login")
         toast.error(err.data?.message || 'Incorrect email or password')
     }
   }
