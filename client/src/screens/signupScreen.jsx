@@ -34,7 +34,8 @@ const SignupScreen = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [currency, setCurrency] = useState("");
     const [isloading, setIsloading] = useState(true);
-    const [message, setMessage] = useState("connecting to backend server this might take a while")
+    const [message, setMessage] = useState("connecting to backend server this might take a while");
+    const [signupText, setSignupText] = useState("Sign Up")
 
 
     const navigate = useNavigate();
@@ -66,10 +67,10 @@ const SignupScreen = () => {
   const handleSubmit = async(e) =>{
     e.preventDefault();
 
-
     if (password !== confirmPassword){
         toast.error('Password and confirm password do not match')
     } else{
+        setSignupText(()=> signupText.padEnd(11, '.'))
         try {
             const res = await signup({firstName, lastName, email, currency, password}).unwrap()
         dispatch(setCredentials(res))
@@ -196,7 +197,7 @@ if(isloading){
                         label="confirmPassword"
                     />
                     </FormControl>
-                    <Button variant='contained' type='submit'>Sign up</Button>
+                    <Button variant='contained' type='submit'>{signupText}</Button>
                     <div>
                         <Link to='/login' className='text-center text-blue-300'>Already have an account? Login
                         </Link>
