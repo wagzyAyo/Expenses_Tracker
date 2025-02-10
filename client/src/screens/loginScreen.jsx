@@ -81,7 +81,9 @@ const LoginScreen = () => {
             noValidate
             autoComplete="off"
             >
-            <img src={logo} alt={logo} className={css(styles.logo)}/>
+            <Link to={'/'}>
+                <img src={logo} alt="logo" className={css(styles.logo)}/>
+            </Link>
 
                 <TextField 
                 id="email" 
