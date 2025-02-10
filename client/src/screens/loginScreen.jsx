@@ -24,7 +24,8 @@ const LoginScreen = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isloading, setIsloading] = useState(true);
-    const [message, setMessage] = useState("connecting to backend server this might take a while")
+    const [message, setMessage] = useState("connecting to backend server this might take a while");
+    const [loginText, setLoginText] = useState("Login")
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -51,6 +52,7 @@ const LoginScreen = () => {
 
   const handleSubmit = async (e)=>{
     e.preventDefault();
+    setLoginText(()=>loginText.padEnd(8, '.'))
     try {
         const res = await login({email, password}).unwrap()
         dispatch(setCredentials(res))
@@ -109,7 +111,7 @@ const LoginScreen = () => {
                         label="Password" name='password' value={password} onChange={e => setPassword(e.target.value)}
                     />
                     </FormControl>
-                    <Button variant='contained' type='submit'>Login</Button>
+                    <Button variant='contained' type='submit'>{loginText}</Button>
                     <Link to='/signup' className='text-center text-blue-300'>Dont have Account? Signup</Link>
             </Box>
     </form>
