@@ -1,3 +1,4 @@
+import { useState } from "react";
 import AddBudget from "../components/AddBudget";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -6,11 +7,13 @@ import Footer from "../components/footer";
 import axios from 'axios'
 
 const AddBudgetScreen = () => {
+  const [addBudgetText, setAddBudgetText] = useState("Add Budget")
   const navigate = useNavigate()
 
   const handleSubmit = async (data)=>{
     try {
-      console.log("Submitting data to API:", data);
+      // console.log("Submitting data to API:", data);
+      setAddBudgetText("Adding Budget")
       const response = await axios.post("https://expense-tracker-server-p92x.onrender.com/api/budget", data, {
         withCredentials: true
       })
@@ -31,7 +34,7 @@ const AddBudgetScreen = () => {
       <Nav />
       <AddBudget 
       onSubmit={handleSubmit} 
-      text={"Add Budget"} 
+      text={addBudgetText} 
       initialValues={""}
       title={"Add new Budget"}
       />

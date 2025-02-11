@@ -20,7 +20,7 @@ const AddBudget = (props) => {
         category,
         amount
       }
-      console.log("form data", data)
+      // console.log("form data", data)
        props.onSubmit(data)     
     }
 
