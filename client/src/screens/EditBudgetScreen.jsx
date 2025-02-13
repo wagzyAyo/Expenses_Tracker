@@ -11,7 +11,8 @@ import Footer from "../components/footer";
 
 const EditBudgetScreen = () => {
     const [editBudgetText, setEditBudgetText] = useState("Update Budget")
-    const [budget, setBudget] = useState(null)
+    const [budget, setBudget] = useState(null);
+    
 
     const [userData] = useUserDataMutation();
     const navigate = useNavigate()
@@ -34,7 +35,7 @@ const EditBudgetScreen = () => {
 
     const handleSubmit = async (formData)=>{
         try {
-            setEditBudgetText("Updating Budget")
+            setEditBudgetText("Updating Budget");
             const response = await axios.put(`https://expense-tracker-server-p92x.onrender.com/api/budget/${id}/update`, 
                 formData,
                 {
