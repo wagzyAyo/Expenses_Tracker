@@ -19,7 +19,7 @@ import { useSignupMutation } from '../slice/userApiSlice';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { currencySymbols } from '../utils/currencySymbols';
-// import { checkAuth } from '../utils/authUtils';
+import { checkAuth } from '../utils/authUtils';
 import Loader from '../components/loader';
 
 
@@ -48,7 +48,8 @@ const SignupScreen = () => {
 
     useEffect(() => {
         const intialize = async ()=>{
-            setMessage("New user Signup")
+            await checkAuth(navigate);
+            setMessage("Checking Authentication")
             const timeOut = setTimeout(()=>setIsloading(false), 300);
             return ()=> clearTimeout(timeOut)
         }
