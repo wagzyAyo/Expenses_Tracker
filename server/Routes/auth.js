@@ -93,7 +93,8 @@ router.post('/signup', async (req, res)=>{
 router.post('/logout', (req, res)=>{
     res.cookie('jwt', '', {
         httpOnly: true,
-        expires: new Date(0)
+        expires: new Date(0),
+        path: "/"
     });
     res.clearCookie('jwt',{
         path: "/",
@@ -111,7 +112,7 @@ router.post('/checkauth', authToken, async (req, res)=>{
          return res.status(200).json({message: "Authorized access, user signed in"})
     } catch (err) {
         console.log("Error checking auth", err)
-        return res.status(401).json({message: "Unaythorized access"})
+        return res.status(401).json({message: "Unauthorized access"})
     }
 
 })
