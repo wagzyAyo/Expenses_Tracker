@@ -48,7 +48,7 @@ const SignupScreen = () => {
 
     useEffect(() => {
         const intialize = async ()=>{
-            await checkAuth(navigate);
+            await checkAuth('signup');
             setMessage("Checking Authentication")
             const timeOut = setTimeout(()=>setIsloading(false), 300);
             return ()=> clearTimeout(timeOut)
