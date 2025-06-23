@@ -109,10 +109,15 @@ router.post('/logout', (req, res)=>{
 
 router.post('/checkauth', authToken, async (req, res)=>{
     try {
-         return res.status(200).json({message: "Authorized access, user signed in"})
+        if (authToken){
+          return res.status(200).json({message: "Authorized access, user signed in"})
+
+        }else{
+            return res.status(401).json({message: "Unauthorized access"})
+        }
     } catch (err) {
         console.log("Error checking auth", err)
-        return res.status(401).json({message: "Unauthorized access"})
+        return res.status(500).json({message: "Internal server error"})
     }
 
 })
