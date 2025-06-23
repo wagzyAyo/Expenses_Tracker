@@ -19,6 +19,7 @@ const authSlice = createSlice({
         },
         //Action to clear users credentials
         clearCredentials : (state) =>{
+            document.cookie = 'jwt' + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
             state.userInfo = null;
             localStorage.removeItem('userInfo')
         }
