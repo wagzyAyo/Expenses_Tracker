@@ -20,7 +20,7 @@ const UserDashboard = () => {
 
  useEffect(()=>{
   const initialize = async ()=>{
-    await checkAuth(navigate, 'login')
+    await checkAuth(navigate)
     try {
       const response = await userData().unwrap()
       setData(response.user);
