@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import {useState, /*useEffect*/} from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
@@ -16,15 +16,15 @@ import { useDispatch, /*useSelector*/ } from 'react-redux';
 import { useLoginMutation } from '../slice/userApiSlice';
 import { setCredentials } from '../slice/auth';
 import {toast} from 'react-toastify';
-import { checkAuth } from '../utils/authUtils';
-import Loader from '../components/loader';
+// import { checkAuth } from '../utils/authUtils';
+// import Loader from '../components/loader';
 
 const LoginScreen = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [isloading, setIsloading] = useState(true);
-    const [message, setMessage] = useState("connecting to backend server this might take a while");
+    // const [isloading, setIsloading] = useState(true);
+    // const [message, setMessage] = useState("connecting to backend server this might take a while");
     const [loginText, setLoginText] = useState("Login")
 
     const navigate = useNavigate();
@@ -33,17 +33,17 @@ const LoginScreen = () => {
     const [login, /*{ isLoading }*/] = useLoginMutation();
     //const { userInfo } = useSelector((state) => state.auth);
 
-    useEffect(() => {
+    // useEffect(() => {
         
-        const intialize = async ()=>{
-            await checkAuth(navigate);
-            setMessage("Checking Authentication");
-            const timeOut = setTimeout(()=> setIsloading(false), 300);
-            return ()=> clearTimeout(timeOut)
-        }
-        intialize();
+    //     const intialize = async ()=>{
+    //         await checkAuth(navigate);
+    //         setMessage("Checking Authentication");
+    //         const timeOut = setTimeout(()=> setIsloading(false), 300);
+    //         return ()=> clearTimeout(timeOut)
+    //     }
+    //     intialize();
         
-    }, [navigate]);
+    // }, [navigate]);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -63,14 +63,14 @@ const LoginScreen = () => {
         toast.error(err.data?.message || 'Incorrect email or password')
     }
   }
- if(isloading){
-    return (
-        <div>
-           <Loader />
-           <div className='text-center text-2xl m-[auto]'>{message}</div>
-        </div>
-    )
- }
+//  if(isloading){
+//     return (
+//         <div>
+//            <Loader />
+//            <div className='text-center text-2xl m-[auto]'>{message}</div>
+//         </div>
+//     )
+//  }
   return (
     <div className={css(styles.flexDisplay)}>
         <form action="" onSubmit={handleSubmit}>
