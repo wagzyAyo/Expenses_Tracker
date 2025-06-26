@@ -26,6 +26,7 @@ const UserDashboard = () => {
       setData(response.user);
       setIsLoading(false);
     } catch (err) {
+      navigate("/login")
       console.log(err)
     }
   }
