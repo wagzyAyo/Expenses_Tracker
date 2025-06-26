@@ -4,6 +4,7 @@ export const checkAuth = async (navigate, route = 'login')=>{
             method: 'POST',
             credentials: 'include'
           });
+          console.log(response.status)
           if(response.status === 200){
             console.log(`User is authenticated; status: ${response.status}`)
             navigate(`/dashboard`)
