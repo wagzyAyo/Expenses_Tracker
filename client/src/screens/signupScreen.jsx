@@ -1,4 +1,4 @@
-import {useState, /*useEffect*/} from 'react';
+import {useState, useEffect} from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
@@ -19,8 +19,8 @@ import { useSignupMutation } from '../slice/userApiSlice';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { currencySymbols } from '../utils/currencySymbols';
-// import { checkAuth } from '../utils/authUtils';
-// import Loader from '../components/loader';
+import { checkAuth } from '../utils/authUtils';
+import Loader from '../components/loader';
 
 
 
@@ -33,8 +33,8 @@ const SignupScreen = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [currency, setCurrency] = useState("");
-    // const [isloading, setIsloading] = useState(true);
-    // const [message, setMessage] = useState("connecting to backend server this might take a while");
+    const [isloading, setIsloading] = useState(true);
+    const [message, setMessage] = useState("connecting to backend server this might take a while");
     const [signupText, setSignupText] = useState("Sign Up")
 
 
@@ -46,15 +46,15 @@ const SignupScreen = () => {
     //const { userInfo } = useSelector((state) => state.auth);
 
 
-    // useEffect(() => {
-    //     const intialize = async ()=>{
-    //         await checkAuth(navigate, 'signup');
-    //         setMessage("Checking Authentication")
-    //         const timeOut = setTimeout(()=>setIsloading(false), 300);
-    //         return ()=> clearTimeout(timeOut)
-    //     }
-    //     intialize();
-    // }, [navigate]);
+    useEffect(() => {
+        const intialize = async ()=>{
+            await checkAuth(navigate, 'signup');
+            setMessage("Checking Authentication")
+            const timeOut = setTimeout(()=>setIsloading(false), 300);
+            return ()=> clearTimeout(timeOut)
+        }
+        intialize();
+    }, [navigate]);
 
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -83,15 +83,15 @@ const SignupScreen = () => {
     }
   }
 
-// if(isloading){
-//     return (
-//         <div>
-//             <Loader />
-//             <div className='text-center text-2xl m-[auto]'>{message}</div>
-//         </div>
+if(isloading){
+    return (
+        <div>
+            <Loader />
+            <div className='text-center text-2xl m-[auto]'>{message}</div>
+        </div>
         
-//     )
-// }
+    )
+}
   return (
     <div className={css(styles.flexDisplay)}>
         <form action="" onSubmit={handleSubmit}>
