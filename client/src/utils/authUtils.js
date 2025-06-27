@@ -11,10 +11,10 @@ export const checkAuth = async (navigate, route = 'login')=>{
               method: 'GET',
               credentials: 'include'
             })
-            if(userData.status === 200){
-              console.log(userData.status)
-              const data = userData.json();
-              console.log(data)
+            const data = userData.json();
+            if(data.user){
+              // console.log(userData.status);
+              console.log(`userData: ${data}`)
               navigate(`/dashboard`)
             }else{
               navigate(`/${route}`)
