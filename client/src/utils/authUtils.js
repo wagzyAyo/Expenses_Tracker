@@ -7,19 +7,14 @@ export const checkAuth = async (navigate, route = 'login')=>{
           console.log(response.status)
           if(response.status === 200){
             console.log(`Token is present: ${response.status}`);
-            const userData = await fetch('https://expense-tracker-server-p92x.onrender.com/api/data',{
-              method: 'GET',
-              credentials: 'include'
-            })
-            const data = userData.json();
-            if(userData.status == 200){
-              // console.log(userData.status);
-              console.log(`userData: ${data}`)
-              navigate(`/dashboard`)
+            const userInfo = localStorage.getItem('userInfo')
+            if(userInfo){
+              console.log('UserInfo present')
+              navigate('/dasboard')
             }else{
+              console.log('User info not present')
               navigate(`/${route}`)
             }
-            
           }else {
               console.log('User is not authenticated', route)
               navigate(`/${route}`)
