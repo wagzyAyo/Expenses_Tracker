@@ -10,7 +10,7 @@ export const checkAuth = async (navigate, route = 'login')=>{
             const userInfo = localStorage.getItem('userInfo')
             if(userInfo){
               console.log('UserInfo present')
-              navigate('/dasboard')
+              navigate('/dashboard')
             }else{
               console.log('User info not present')
               navigate(`/${route}`)
