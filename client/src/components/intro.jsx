@@ -126,8 +126,8 @@ const Intro = (props) => {
           <Button onClick={handleChangeSummary}>{summary ? "Hide Summary" : "Show Summary"}</Button>
         </div>
       </div>
-      <div className="mt-10">
-        <b>NetSpend:</b> <b>{props.currency}</b>{toMoney(netSpend(filteredExp))}
+      <div className="mt-5">
+        <b>Net Spend:</b> <b>{props.currency}</b>{toMoney(netSpend(filteredExp))}
       </div>
       {summary ? (
         filteredExp.length > 0 ? (
